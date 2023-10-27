@@ -25,7 +25,12 @@ namespace TokenSwapping
 		}
 	}
 
-	int Instance::get(int index) const
+	int Instance::size() const
+	{
+		return m_tokens.size();
+	}
+
+	int Instance::operator[](int index) const
 	{
 		if (index < 0 || index >= m_tokens.size())
 		{
@@ -33,6 +38,18 @@ namespace TokenSwapping
 		}
 
 		return m_tokens[index];
+	}
+
+	bool Instance::isSolved() const
+	{
+		for (int i = 0; i < m_tokens.size(); i++)
+		{
+			if (m_tokens[i] != i)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	bool Instance::swap(int firstIndex, int secondIndex)
@@ -54,18 +71,6 @@ namespace TokenSwapping
 		int tmp = m_tokens[firstIndex];
 		m_tokens[firstIndex] = m_tokens[secondIndex];
 		m_tokens[secondIndex] = tmp;
-		return true;
-	}
-
-	bool Instance::isSolved() const
-	{
-		for (int i = 0; i < m_tokens.size(); i++)
-		{
-			if (m_tokens[i] != i)
-			{
-				return false;
-			}
-		}
 		return true;
 	}
 

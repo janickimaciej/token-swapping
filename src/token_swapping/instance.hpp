@@ -9,9 +9,11 @@ namespace TokenSwapping
 	public:
 		Instance(int power, std::vector<int> tokens);
 
-		int get(int index) const;
-		bool swap(int firstIndex, int secondIndex);
+		int size() const;
+		int operator[](int index) const;
 		bool isSolved() const;
+
+		bool swap(int firstIndex, int secondIndex);
 
 	private:
 		int m_power;
