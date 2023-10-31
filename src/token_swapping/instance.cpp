@@ -16,13 +16,18 @@ namespace TokenSwapping
 			error("Instance::Instance: Invalid power");
 		}
 		std::sort(tokens.begin(), tokens.end());
-		for (int i = 0; i < tokens.size(); i++)
+		for (int i = 0; i < tokens.size(); ++i)
 		{
 			if (tokens[i] != i)
 			{
 				error("Instance::Instance: Invalid instance");
 			}
 		}
+	}
+
+	int Instance::power() const
+	{
+		return m_power;
 	}
 
 	int Instance::size() const
@@ -42,7 +47,7 @@ namespace TokenSwapping
 
 	bool Instance::isSolved() const
 	{
-		for (int i = 0; i < m_tokens.size(); i++)
+		for (int i = 0; i < m_tokens.size(); ++i)
 		{
 			if (m_tokens[i] != i)
 			{
