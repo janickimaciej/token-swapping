@@ -10,7 +10,7 @@ namespace TokenSwapping
 		std::vector<std::vector<std::pair<int, int>>> solutions;
 		std::vector<std::pair<int, int>> solution;
 
-		recursiveSort(instance, solutions, solution, depth, std::pair<int, int>(-1, -1));
+		recursiveSort(instance, solutions, solution, depth, std::make_pair(-1, -1));
 
 		return solutions;
 	}
@@ -20,29 +20,32 @@ namespace TokenSwapping
 		std::vector<std::pair<int, int>>& solution, int& maxDepth,
 		std::pair<int, int> lastSwap)
 	{
-		if (solution.size() == maxDepth)
-		{
-			if (instance.isSolved())
-			{
-				solutions.push_back(solution);
-			}
-			return;
-		}
 		if (instance.isSolved())
 		{
-			solutions.clear();
+			if (solution.size() < maxDepth)
+			{
+				solutions.clear();
+				maxDepth = solution.size();
+			}
 			solutions.push_back(solution);
-			maxDepth == solution.size();
+			return;
+		}
+		if (solution.size() == maxDepth)
+		{
+			return;
 		}
 		for (int i = 1; i <= instance.power(); ++i)
 		{
 			for (int j = 0; j < instance.size() - instance.power(); ++j)
 			{
 				if (j == lastSwap.first && j + i == lastSwap.second)
+				{
+					continue;
+				}
 				instance.swap(j, j + i);
 				solution.push_back(std::pair<int, int>{j, j + i});
 				recursiveSort(instance, solutions, solution, maxDepth,
-					std::pair<int, int>{j, j + i});
+					std::make_pair(j, j + i));
 				instance.swap(j, j + i);
 				solution.pop_back();
 			}

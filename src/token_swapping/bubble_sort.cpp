@@ -16,7 +16,7 @@ namespace TokenSwapping
 				if (instance[j] > instance[j + 1])
 				{
 					instance.swap(j, j + 1);
-					solution.push_back(std::pair<int, int>{j, j + 1});
+					solution.push_back(std::make_pair(j, j + 1));
 					swapped = true;
 				}
 			}
