@@ -13,6 +13,7 @@ namespace TokenSwapping
 		int size() const;
 		int operator[](int index) const;
 		bool isSolved() const;
+		bool operator==(const Instance& instance) const;
 
 		bool swap(int firstIndex, int secondIndex);
 

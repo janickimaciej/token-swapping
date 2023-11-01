@@ -57,6 +57,11 @@ namespace TokenSwapping
 		return true;
 	}
 
+	bool Instance::operator==(const Instance& instance) const
+	{
+		return m_power == instance.m_power && m_tokens == instance.m_tokens;
+	}
+
 	bool Instance::swap(int firstIndex, int secondIndex)
 	{
 		if (firstIndex < 0 || secondIndex < 0 || firstIndex >= m_tokens.size() ||

@@ -6,11 +6,11 @@ namespace TokenSwapping
 {
 	std::vector<std::vector<std::pair<int, int>>> BruteForceSort::sort(Instance instance)
 	{
-		int depth = BubbleSort::sort(instance).size();
+		int maxDepth = BubbleSort::sort(instance).size();
 		std::vector<std::vector<std::pair<int, int>>> solutions;
 		std::vector<std::pair<int, int>> solution;
 
-		recursiveSort(instance, solutions, solution, depth, std::make_pair(-1, -1));
+		recursiveSort(instance, solutions, solution, maxDepth, std::make_pair(-1, -1));
 
 		return solutions;
 	}
@@ -43,7 +43,7 @@ namespace TokenSwapping
 					continue;
 				}
 				instance.swap(j, j + i);
-				solution.push_back(std::pair<int, int>{j, j + i});
+				solution.push_back(std::make_pair(j, j + i));
 				recursiveSort(instance, solutions, solution, maxDepth,
 					std::make_pair(j, j + i));
 				instance.swap(j, j + i);
