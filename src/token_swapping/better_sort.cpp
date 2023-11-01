@@ -28,17 +28,17 @@ namespace TokenSwapping
 	std::vector<std::pair<int, int>> LinearSort::sort(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
-		for (int i = 1; i < instance.size()-1; ++i)
+		for (int i = 1; i < instance.size() - 1; ++i)
 		{
-			if (i-1 == instance[i-1] && 
-				i == instance[i] && 
-				i+1 == instance[i+1]) {
-				i+=2;
+			if (i - 1 == instance[i - 1] &&
+				i == instance[i] &&
+				i + 1 == instance[i + 1]) {
+				i += 2;
 				continue;
 			}
 
 			int score = 0;
-			std::vector<int> a = { instance[i-1], instance[i], instance[i+1] };
+			std::vector<int> a = { instance[i - 1], instance[i], instance[i + 1] };
 			std::vector<std::vector<int>> permutations = generatePermutations(a, 0);
 			std::vector<int> best_permutation;
 
@@ -52,7 +52,7 @@ namespace TokenSwapping
 					score = new_score;
 				}
 			}
-			
+
 			std::vector<int> not_matching_tokens;
 			for (int j = 0;j < best_permutation.size();j++) {
 				if (instance[i + j - 1] != best_permutation[j]) {
