@@ -129,12 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\token_swapping\better_sort.cpp" />
     <ClCompile Include="src\token_swapping\special_sort.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\token_swapping\bubble_sort.cpp" />
     <ClCompile Include="src\token_swapping\instance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\token_swapping\better_sort.hpp" />
     <ClInclude Include="src\token_swapping\bubble_sort.hpp" />
     <ClInclude Include="src\token_swapping\instance.hpp" />
     <ClInclude Include="src\token_swapping\special_sort.hpp" />
