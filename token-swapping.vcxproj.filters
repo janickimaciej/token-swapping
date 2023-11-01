@@ -24,12 +24,24 @@
     <ClCompile Include="src\token_swapping\bubble_sort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\token_swapping\brute_force_sort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\token_swapping\new_brute_force_sort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\instance.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\token_swapping\bubble_sort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\token_swapping\brute_force_sort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\token_swapping\new_brute_force_sort.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
