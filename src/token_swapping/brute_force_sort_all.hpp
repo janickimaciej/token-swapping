@@ -7,14 +7,14 @@
 
 namespace TokenSwapping
 {
-	class BruteForceSort
+	class BruteForceSortAll
 	{
 	public:
-		BruteForceSort() = delete;
+		BruteForceSortAll() = delete;
 
 		static std::vector<std::vector<std::pair<int, int>>> sort(Instance instance);
 
-		~BruteForceSort() = delete;
+		~BruteForceSortAll() = delete;
 
 	private:
 		static void recursiveSort(Instance& instance,

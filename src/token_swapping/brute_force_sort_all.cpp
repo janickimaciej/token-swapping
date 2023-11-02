@@ -1,10 +1,10 @@
-#include "token_swapping/brute_force_sort.hpp"
+#include "token_swapping/brute_force_sort_all.hpp"
 
 #include "token_swapping/bubble_sort.hpp"
 
 namespace TokenSwapping
 {
-	std::vector<std::vector<std::pair<int, int>>> BruteForceSort::sort(Instance instance)
+	std::vector<std::vector<std::pair<int, int>>> BruteForceSortAll::sort(Instance instance)
 	{
 		std::vector<std::vector<std::pair<int, int>>> solutions;
 		std::vector<std::pair<int, int>> solution;
@@ -17,7 +17,7 @@ namespace TokenSwapping
 		return solutions;
 	}
 
-	void BruteForceSort::recursiveSort(Instance& instance,
+	void BruteForceSortAll::recursiveSort(Instance& instance,
 		std::vector<std::vector<std::pair<int, int>>>& solutions,
 		std::vector<std::pair<int, int>>& solution, int maxDepth,
 		std::pair<int, int> lastSwap)
