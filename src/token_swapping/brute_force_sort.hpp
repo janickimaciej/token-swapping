@@ -19,7 +19,7 @@ namespace TokenSwapping
 	private:
 		static void recursiveSort(Instance& instance,
 			std::vector<std::vector<std::pair<int, int>>>& solutions,
-			std::vector<std::pair<int, int>>& solution, int& maxDepth,
+			std::vector<std::pair<int, int>>& solution, int maxDepth,
 			std::pair<int, int> lastSwap);
 	};
 };

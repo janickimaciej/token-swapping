@@ -133,13 +133,11 @@
     <ClCompile Include="src\token_swapping\brute_force_sort.cpp" />
     <ClCompile Include="src\token_swapping\bubble_sort.cpp" />
     <ClCompile Include="src\token_swapping\instance.cpp" />
-    <ClCompile Include="src\token_swapping\new_brute_force_sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\brute_force_sort.hpp" />
     <ClInclude Include="src\token_swapping\bubble_sort.hpp" />
     <ClInclude Include="src\token_swapping\instance.hpp" />
-    <ClInclude Include="src\token_swapping\new_brute_force_sort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
