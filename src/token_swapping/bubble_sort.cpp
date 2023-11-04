@@ -5,7 +5,7 @@
 
 namespace TokenSwapping
 {
-	std::vector<std::pair<int, int>> BubbleSort::sort(Instance instance)
+	std::vector<std::pair<int, int>> BubbleSort::getSolution(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
 		for (int i = 1; i < instance.size(); ++i)
