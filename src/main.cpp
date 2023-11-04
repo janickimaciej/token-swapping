@@ -1,5 +1,4 @@
-#include "token_swapping/brute_force_sort_all.hpp"
-#include "token_swapping/brute_force_sort_one.hpp"
+#include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
 #include "token_swapping/better_sort.hpp"
 #include "token_swapping/special_sort.hpp"
@@ -10,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+void printSolution(std::vector<std::pair<int, int>> solution);
 void bruteForceTestOne();
 void bruteForceTestAll();
 
@@ -19,28 +19,33 @@ int main()
 	return 0;
 }
 
-void bruteForceTestOne()
+void printSolution(std::vector<std::pair<int, int>> solution)
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
-	auto start = std::chrono::high_resolution_clock::now();
-	std::vector<std::pair<int, int>> solution = TokenSwapping::BruteForceSortOne::sort(instance);
-	auto stop = std::chrono::high_resolution_clock::now();
-
-	auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::cout << "shortest solution found in " << durationMs.count() << " ms\n\n";
-
-	std::cout << "solution:\n";
 	for (const std::pair<int, int>& edge : solution)
 	{
 		std::cout << edge.first << " <-> " << edge.second << '\n';
 	}
 }
 
+void bruteForceTestOne()
+{
+	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
+	auto start = std::chrono::high_resolution_clock::now();
+	std::vector<std::pair<int, int>> solution = TokenSwapping::BruteForceSort::getSolution(instance);
+	auto stop = std::chrono::high_resolution_clock::now();
+
+	auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+	std::cout << "shortest solution found in " << durationMs.count() << " ms\n\n";
+
+	std::cout << "solution:\n";
+	printSolution(solution);
+}
+
 void bruteForceTestAll()
 {
 	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
-	std::vector<std::vector<std::pair<int, int>>> solutions = TokenSwapping::BruteForceSortAll::sort(instance);
+	std::vector<std::vector<std::pair<int, int>>> solutions = TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
 
 	auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
@@ -49,8 +54,5 @@ void bruteForceTestAll()
 
 	int solutionIndex = 0;
 	std::cout << "solutions[" << solutionIndex << "]:\n";
-	for (const std::pair<int, int>& edge : solutions[0])
-	{
-		std::cout << edge.first << " <-> " << edge.second << '\n';
-	}
+	printSolution(solutions[0]);
 }
