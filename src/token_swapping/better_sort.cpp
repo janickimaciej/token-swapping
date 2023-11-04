@@ -17,17 +17,28 @@ namespace TokenSwapping
 				}
 
 				std::vector<int> permutation;
-				permutation.push_back(instance[i - 1]);
-				permutation.push_back(instance[i]);
-				permutation.push_back(instance[i + 1]);
-
+				std::vector<int> indexes;
+				if (instance[i - 1] != i - 1) {
+					permutation.push_back(instance[i - 1]);
+					indexes.push_back(0);
+				}
+				if (instance[i] != i) {
+					permutation.push_back(instance[i]);
+					indexes.push_back(1);
+				}
+				if (instance[i + 1] != i + 1) {
+					permutation.push_back(instance[i + 1]);
+					indexes.push_back(2);
+				}
 				std::sort(permutation.begin(), permutation.end());
 
+				int k = 0;
 				std::vector<int> not_matching_tokens;
-				for (int j = 0;j < permutation.size();j++) {
-					if (permutation[j] != instance[i + j - 1]) {
+				for (int j : indexes) {
+					if (permutation[k] != instance[i + j - 1]) {
 						not_matching_tokens.push_back(i + j - 1);
 					}
+					k++;
 				}
 
 				if (not_matching_tokens.size() == 3) {
@@ -45,8 +56,10 @@ namespace TokenSwapping
 					}
 				}
 				else if (not_matching_tokens.size() == 2) {
-					instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-					solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+					if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
+						instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
+						solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+					}
 				}
 			}
 			bool isSorted = true;
