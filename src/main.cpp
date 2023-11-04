@@ -1,6 +1,8 @@
 #include "token_swapping/brute_force_sort_all.hpp"
 #include "token_swapping/brute_force_sort_one.hpp"
 #include "token_swapping/bubble_sort.hpp"
+#include "token_swapping/better_sort.hpp"
+#include "token_swapping/special_sort.hpp"
 #include "token_swapping/instance.hpp"
 
 #include <chrono>

@@ -25,6 +25,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\token_swapping\brute_force_sort.cpp">
+    <ClCompile Include="src\token_swapping\special_sort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\token_swapping\better_sort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +39,14 @@
     <ClInclude Include="src\token_swapping\bubble_sort.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="src\token_swapping\brute_force_sort.hpp">
+=======
+    <ClInclude Include="src\token_swapping\special_sort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\token_swapping\better_sort.hpp">
+>>>>>>> adrian/try_better_than_brute_force
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

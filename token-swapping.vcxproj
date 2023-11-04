@@ -129,6 +129,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\token_swapping\better_sort.cpp" />
+    <ClCompile Include="src\token_swapping\special_sort.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\token_swapping\brute_force_sort_all.cpp" />
     <ClCompile Include="src\token_swapping\brute_force_sort_one.cpp" />
@@ -138,8 +140,10 @@
   <ItemGroup>
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort_one.hpp" />
+    <ClInclude Include="src\token_swapping\better_sort.hpp" />
     <ClInclude Include="src\token_swapping\bubble_sort.hpp" />
     <ClInclude Include="src\token_swapping\instance.hpp" />
+    <ClInclude Include="src\token_swapping\special_sort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
