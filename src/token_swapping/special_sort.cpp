@@ -5,7 +5,7 @@
 
 namespace TokenSwapping
 {
-	std::vector<std::pair<int, int>> SpecialSort::sort(Instance instance)
+	std::vector<std::pair<int, int>> SpecialSort::getSolution(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
 		for (int j = 0; j < instance.size(); j++) {

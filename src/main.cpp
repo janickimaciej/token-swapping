@@ -1,8 +1,8 @@
+#include "token_swapping/better_sort.hpp"
 #include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
-#include "token_swapping/better_sort.hpp"
-#include "token_swapping/special_sort.hpp"
 #include "token_swapping/instance.hpp"
+#include "token_swapping/special_sort.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -15,7 +15,16 @@ void bruteForceTestAll();
 
 int main()
 {
-	bruteForceTestOne();
+	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
+
+	printSolution(TokenSwapping::BubbleSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::SpecialSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::BetterSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::BruteForceSort::getSolution(instance));
+	std::cout << '\n';
 	return 0;
 }
 
