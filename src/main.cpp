@@ -1,7 +1,9 @@
 #include "token_swapping/better_sort.hpp"
 #include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
+#include "token_swapping/greedy_sort.hpp"
 #include "token_swapping/instance.hpp"
+#include "token_swapping/pairs_metric.hpp"
 #include "token_swapping/special_sort.hpp"
 
 #include <chrono>
@@ -12,24 +14,17 @@
 void printSolution(std::vector<std::pair<int, int>> solution);
 void bruteForceTestOne();
 void bruteForceTestAll();
+void compareAlgs();
 
 int main()
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
-
-	printSolution(TokenSwapping::BubbleSort::getSolution(instance));
-	std::cout << '\n';
-	printSolution(TokenSwapping::SpecialSort::getSolution(instance));
-	std::cout << '\n';
-	printSolution(TokenSwapping::BetterSort::getSolution(instance));
-	std::cout << '\n';
-	printSolution(TokenSwapping::BruteForceSort::getSolution(instance));
-	std::cout << '\n';
+	compareAlgs();
 	return 0;
 }
 
 void printSolution(std::vector<std::pair<int, int>> solution)
 {
+	std::cout << solution.size() << " moves" << '\n';
 	for (const std::pair<int, int>& edge : solution)
 	{
 		std::cout << edge.first << " <-> " << edge.second << '\n';
@@ -64,4 +59,20 @@ void bruteForceTestAll()
 	int solutionIndex = 0;
 	std::cout << "solutions[" << solutionIndex << "]:\n";
 	printSolution(solutions[0]);
+}
+
+void compareAlgs()
+{
+	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 7, 1, 4, 0}};
+
+	printSolution(TokenSwapping::BubbleSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::SpecialSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::BetterSort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::GreedySort::getSolution(instance));
+	std::cout << '\n';
+	printSolution(TokenSwapping::BruteForceSort::getSolution(instance));
+	std::cout << '\n';
 }
