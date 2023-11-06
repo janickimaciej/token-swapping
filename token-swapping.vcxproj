@@ -131,7 +131,9 @@
   <ItemGroup>
     <ClCompile Include="src\token_swapping\better_sort.cpp" />
     <ClCompile Include="src\token_swapping\greedy_sort.cpp" />
+    <ClCompile Include="src\token_swapping\less_greedy_sort.cpp" />
     <ClCompile Include="src\token_swapping\pairs_metric.cpp" />
+    <ClCompile Include="src\token_swapping\reverse_triples.cpp" />
     <ClCompile Include="src\token_swapping\special_sort.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\token_swapping\brute_force_sort.cpp" />
@@ -146,8 +148,10 @@
     <ClInclude Include="src\token_swapping\bubble_sort.hpp" />
     <ClInclude Include="src\token_swapping\greedy_sort.hpp" />
     <ClInclude Include="src\token_swapping\instance.hpp" />
+    <ClInclude Include="src\token_swapping\less_greedy_sort.hpp" />
     <ClInclude Include="src\token_swapping\pairs_metric.hpp" />
     <ClInclude Include="src\token_swapping\special_sort.hpp" />
+    <ClInclude Include="src\token_swapping\reverse_triples.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
