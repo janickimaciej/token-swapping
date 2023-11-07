@@ -70,6 +70,64 @@ namespace TokenSwapping
 			if (isSorted)
 				break;
 		}
+
+		// Zamiana miejscami pozosta³ych niepasuj¹cych
+		std::vector<int> not_on_place;
+		for (int i = 0; i < instance.size();++i) {
+			if (instance[i] != i)
+				not_on_place.push_back(i);
+		}
+
+		std::vector<std::pair<int, int>> not_on_place_pairs;
+		for (int k= 0;k < not_on_place.size();k++) {
+			for (int l = 0;l < not_on_place.size();l++) {
+				if (k == l)
+					continue;
+				if (not_on_place[k] == instance[not_on_place[l]] && not_on_place[l] == instance[not_on_place[k]]) {
+					not_on_place_pairs.push_back(std::pair<int, int>{not_on_place[k], not_on_place[l]});
+				}
+
+			}
+		}
+
+		for (int j = 0; j < not_on_place_pairs.size();j++) {
+			int idx1 = not_on_place_pairs[j].first;
+			int idx2 = not_on_place_pairs[j].second;
+
+			if (idx1 == instance[idx2] && idx2 == instance[idx1]) {
+				int distance = idx2 - idx1;
+				int steps = distance / 2;
+				int t = idx1;
+				while (steps > 0) {
+					instance.swap(t, t + 2);
+					solution.push_back(std::pair<int, int>{t, t + 2});
+					t = t + 2;
+					steps--;
+				}
+				if (distance % 2 == 1) {
+					instance.swap(t, t + 1);
+					solution.push_back(std::pair<int, int>{t, t + 1});
+					steps = distance / 2;
+					while (steps > 0) {
+						instance.swap(t - 2, t);
+						solution.push_back(std::pair<int, int>{t - 2, t});
+						t = t - 2;
+						steps--;
+					}
+				}
+				else {
+					steps = distance / 2 - 1;
+					t = t - 2;
+					while (steps > 0) {
+						instance.swap(t - 2, t);
+						solution.push_back(std::pair<int, int>{t - 2, t});
+						t = t - 2;
+						steps--;
+					}
+				}
+			}
+		}
+
 		return solution;
 	}
 };

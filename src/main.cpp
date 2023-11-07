@@ -15,12 +15,8 @@ void bruteForceTestAll();
 
 int main()
 {
-	bruteForceTestOne();
-	return 0;
-}
-
-void printSolution(std::vector<std::pair<int, int>> solution)
-{
+	TokenSwapping::Instance instance(2, std::vector<int>{5,1,2,3,4,0});
+	std::vector<std::pair<int, int>> solution = TokenSwapping::BetterSort::sort(instance); // 4, 3, 2, 1, 0
 	for (const std::pair<int, int>& edge : solution)
 	{
 		std::cout << edge.first << " <-> " << edge.second << '\n';
