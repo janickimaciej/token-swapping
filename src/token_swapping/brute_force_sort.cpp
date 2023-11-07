@@ -45,7 +45,7 @@ namespace TokenSwapping
 		}
 		for (int i = 1; i <= instance.power(); ++i)
 		{
-			for (int j = 0; j < instance.size() - instance.power(); ++j)
+			for (int j = 0; j < instance.size() - i; ++j)
 			{
 				if (j == lastSwap.first && j + i == lastSwap.second)
 				{
@@ -81,7 +81,7 @@ namespace TokenSwapping
 		}
 		for (int i = 1; i <= instance.power(); ++i)
 		{
-			for (int j = 0; j < instance.size() - instance.power(); ++j)
+			for (int j = 0; j < instance.size() - i; ++j)
 			{
 				if (j == lastSwap.first && j + i == lastSwap.second)
 				{

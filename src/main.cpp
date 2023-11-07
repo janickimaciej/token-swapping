@@ -49,7 +49,7 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 
 void bruteForceTestOne()
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 1, 4, 0}};
+	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<std::pair<int, int>> solution = TokenSwapping::BruteForceSort::getSolution(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -63,7 +63,7 @@ void bruteForceTestOne()
 
 void bruteForceTestAll()
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{2, 7, 5, 6, 1, 3, 4, 0}};
+	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<std::vector<std::pair<int, int>>> solutions = TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -96,6 +96,10 @@ void compareAlgs()
 
 	std::cout << "Less greedy sort:" <<'\n';
 	printSolution(instance, TokenSwapping::LessGreedySort::getSolution(instance));
+	std::cout << '\n';
+
+	std::cout << "Better sort:" <<'\n';
+	printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
 	std::cout << '\n';
 
 	std::cout << "Better less greedy sort:" <<'\n';
