@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,6 +120,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\token_swapping\better_less_greedy_sort.cpp" />
+    <ClCompile Include="src\token_swapping\better_reverse_triples.cpp" />
     <ClCompile Include="src\token_swapping\better_sort.cpp" />
     <ClCompile Include="src\token_swapping\greedy_sort.cpp" />
     <ClCompile Include="src\token_swapping\less_greedy_sort.cpp" />
@@ -141,6 +145,8 @@
     <ClCompile Include="src\token_swapping\instance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\token_swapping\better_less_greedy_sort.hpp" />
+    <ClInclude Include="src\token_swapping\better_reverse_triples.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort_one.hpp" />
     <ClInclude Include="src\token_swapping\better_sort.hpp" />

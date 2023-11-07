@@ -1,3 +1,4 @@
+#include "token_swapping/better_less_greedy_sort.hpp"
 #include "token_swapping/better_sort.hpp"
 #include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
@@ -16,6 +17,7 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 void bruteForceTestOne();
 void bruteForceTestAll();
 void compareAlgs();
+void mostSimilarOptimalSolution();
 int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 	const std::vector<std::vector<std::pair<int, int>>>& solutions);
 
@@ -61,7 +63,7 @@ void bruteForceTestOne()
 
 void bruteForceTestAll()
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{6, 4, 3, 1, 2, 0, 5}};
+	TokenSwapping::Instance instance{2, std::vector<int>{2, 7, 5, 6, 1, 3, 4, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<std::vector<std::pair<int, int>>> solutions = TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -82,18 +84,10 @@ void bruteForceTestAll()
 
 void compareAlgs()
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{6, 2, 5, 3, 7, 1, 4, 0}};
+	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
 
 	std::cout << "Bubble sort:" <<'\n';
 	printSolution(instance, TokenSwapping::BubbleSort::getSolution(instance));
-	std::cout << '\n';
-
-	std::cout << "Special sort:" <<'\n';
-	printSolution(instance, TokenSwapping::SpecialSort::getSolution(instance));
-	std::cout << '\n';
-
-	std::cout << "Better sort:" <<'\n';
-	printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
 	std::cout << '\n';
 
 	std::cout << "Greedy sort:" <<'\n';
@@ -104,9 +98,42 @@ void compareAlgs()
 	printSolution(instance, TokenSwapping::LessGreedySort::getSolution(instance));
 	std::cout << '\n';
 
+	std::cout << "Better less greedy sort:" <<'\n';
+	printSolution(instance, TokenSwapping::BetterLessGreedySort::getSolution(instance));
+	std::cout << '\n';
+
 	std::cout << "Brute force sort:" <<'\n';
 	printSolution(instance, TokenSwapping::BruteForceSort::getSolution(instance));
 	std::cout << '\n';
+}
+
+void mostSimilarOptimalSolution()
+{
+	TokenSwapping::Instance instance{2, std::vector<int>{2, 7, 5, 6, 1, 3, 4, 0}};
+	std::vector<std::vector<std::pair<int, int>>> optimalSolutions =
+		TokenSwapping::BruteForceSort::getAllSolutions(instance);
+	std::vector<std::pair<int, int>> solution =
+		TokenSwapping::BetterLessGreedySort::getSolution(instance);
+	
+	std::vector<std::pair<int, int>> mostSimilar;
+	int similarity = -1;
+	for (auto& optimalSolution : optimalSolutions)
+	{
+		int i = 0;
+		for (; i < optimalSolution.size(); ++i)
+		{
+			if (optimalSolution[i] != solution[i])
+			{
+				break;
+			}
+		}
+		if (i > similarity)
+		{
+			mostSimilar = optimalSolution;
+			similarity = i;
+		}
+	}
+	printSolution(instance, mostSimilar);
 }
 
 int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
