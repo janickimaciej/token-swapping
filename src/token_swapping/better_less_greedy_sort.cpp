@@ -1,6 +1,6 @@
-#include "token_swapping/less_greedy_sort.hpp"
+#include "token_swapping/better_less_greedy_sort.hpp"
+#include "token_swapping/better_reverse_triples.hpp"
 #include "token_swapping/pairs_metric.hpp"
-#include "token_swapping/reverse_triples.hpp"
 
 #include <climits>
 #include <utility>
@@ -8,7 +8,7 @@
 
 namespace TokenSwapping
 {
-	std::vector<std::pair<int, int>> LessGreedySort::getSolution(Instance instance)
+	std::vector<std::pair<int, int>> BetterLessGreedySort::getSolution(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
 		while (!instance.isSolved())
@@ -42,12 +42,12 @@ namespace TokenSwapping
 		return solution;
 	}
 
-	void LessGreedySort::checkBestMove(const Instance& instance, const std::pair<int, int>& move,
+	void BetterLessGreedySort::checkBestMove(const Instance& instance, const std::pair<int, int>& move,
 		int changeInDistance, std::pair<int, int>& bestMove, int& maxChangeInReverseTriples)
 	{
 		if (PairsMetric::changeInDistance(instance, move) == changeInDistance)
 		{
-			int changeInReverseTriples = ReverseTriples::changeInCount(instance, move);
+			int changeInReverseTriples = BetterReverseTriples::changeInCount(instance, move);
 			if (changeInReverseTriples > maxChangeInReverseTriples)
 			{
 				bestMove = move;
