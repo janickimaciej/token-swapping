@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utility>
 #include <vector>
 
 namespace TokenSwapping
@@ -13,9 +14,11 @@ namespace TokenSwapping
 		int size() const;
 		int operator[](int index) const;
 		bool isSolved() const;
+		bool isSolution(const std::vector<std::pair<int, int>>& solution) const;
 		bool operator==(const Instance& instance) const;
 
-		bool swap(int firstIndex, int secondIndex);
+		void swap(int firstIndex, int secondIndex);
+		void swap(const std::pair<int, int>& move);
 
 	private:
 		int m_power;

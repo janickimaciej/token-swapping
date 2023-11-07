@@ -12,7 +12,7 @@ namespace TokenSwapping
 	public:
 		SpecialSort() = delete;
 
-		static std::vector<std::pair<int, int>> sort(Instance instance);
+		static std::vector<std::pair<int, int>> getSolution(Instance instance);
 
 		~SpecialSort() = delete;
 	};

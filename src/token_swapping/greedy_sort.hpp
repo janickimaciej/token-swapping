@@ -7,13 +7,13 @@
 
 namespace TokenSwapping
 {
-	class BetterSort
+	class GreedySort
 	{
 	public:
-		BetterSort() = delete;
+		GreedySort() = delete;
 
 		static std::vector<std::pair<int, int>> getSolution(Instance instance);
 
-		~BetterSort() = delete;
+		~GreedySort() = delete;
 	};
 };

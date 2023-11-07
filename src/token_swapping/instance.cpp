@@ -57,12 +57,22 @@ namespace TokenSwapping
 		return true;
 	}
 
+	bool Instance::isSolution(const std::vector<std::pair<int, int>>& solution) const
+	{
+		Instance instance = *this;
+		for (const std::pair<int, int>& move : solution)
+		{
+			instance.swap(move);
+		}
+		return instance.isSolved();
+	}
+
 	bool Instance::operator==(const Instance& instance) const
 	{
 		return m_power == instance.m_power && m_tokens == instance.m_tokens;
 	}
 
-	bool Instance::swap(int firstIndex, int secondIndex)
+	void Instance::swap(int firstIndex, int secondIndex)
 	{
 		if (firstIndex < 0 || secondIndex < 0 || firstIndex >= m_tokens.size() ||
 			secondIndex >= m_tokens.size())
@@ -81,7 +91,11 @@ namespace TokenSwapping
 		int tmp = m_tokens[firstIndex];
 		m_tokens[firstIndex] = m_tokens[secondIndex];
 		m_tokens[secondIndex] = tmp;
-		return true;
+	}
+
+	void Instance::swap(const std::pair<int, int>& move)
+	{
+		swap(move.first, move.second);
 	}
 
 	void Instance::error(const char* msg) const
