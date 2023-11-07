@@ -21,11 +21,6 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-<<<<<<< HEAD
-	TokenSwapping::Instance instance(2, std::vector<int>{5,1,2,3,4,0});
-	std::vector<std::pair<int, int>> solution = TokenSwapping::BetterSort::sort(instance); // 4, 3, 2, 1, 0
-	for (const std::pair<int, int>& edge : solution)
-=======
 	compareAlgs();
 	return 0;
 }
@@ -35,7 +30,6 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 	std::cout << solution.size() << " moves" << '\n';
 	TokenSwapping::Instance instanceCopy = instance;
 	for (const std::pair<int, int>& move : solution)
->>>>>>> d45917a0e30e5a3c4ed6616c4ab213856d55e40d
 	{
 		std::cout << move.first << " <-> " << move.second << " : " <<
 			TokenSwapping::PairsMetric::changeInDistance(instanceCopy, move) << '\n';
