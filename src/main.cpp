@@ -9,7 +9,7 @@
 
 int main()
 {
-	TokenSwapping::Instance instance(2, std::vector<int>{1, 3, 0, 5, 4, 2});
+	TokenSwapping::Instance instance(2, std::vector<int>{5,1,2,3,4,0});
 	std::vector<std::pair<int, int>> solution = TokenSwapping::BetterSort::sort(instance); // 4, 3, 2, 1, 0
 	for (const std::pair<int, int>& edge : solution)
 	{
