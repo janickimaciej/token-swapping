@@ -14,16 +14,17 @@
 #include <vector>
 
 void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pair<int, int>> solution);
-void bruteForceTestOne();
-void bruteForceTestAll();
-void compareAlgs();
-void mostSimilarOptimalSolution();
+void bruteForceTestOne(const TokenSwapping::Instance& instance);
+void bruteForceTestAll(const TokenSwapping::Instance& instance);
+void compareAlgs(const TokenSwapping::Instance& instance);
+void mostSimilarOptimalSolution(const TokenSwapping::Instance& instance);
 int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 	const std::vector<std::vector<std::pair<int, int>>>& solutions);
 
 int main()
 {
-	compareAlgs();
+	TokenSwapping::Instance instance{2, {0, 7, 2, 5, 3, 4, 1, 6}};
+	compareAlgs(instance);
 	return 0;
 }
 
@@ -31,12 +32,14 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 {
 	std::cout << solution.size() << " moves" << '\n';
 	TokenSwapping::Instance instanceCopy = instance;
+#if 0
 	for (const std::pair<int, int>& move : solution)
 	{
 		std::cout << move.first << " <-> " << move.second << " : " <<
 			TokenSwapping::PairsMetric::changeInDistance(instanceCopy, move) << '\n';
 		instanceCopy.swap(move);
 	}
+#endif
 	if (instance.isSolution(solution))
 	{
 		std::cout << "SUCCESS\n";
@@ -47,9 +50,8 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 	}
 }
 
-void bruteForceTestOne()
+void bruteForceTestOne(const TokenSwapping::Instance& instance)
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<std::pair<int, int>> solution = TokenSwapping::BruteForceSort::getSolution(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -61,9 +63,8 @@ void bruteForceTestOne()
 	printSolution(instance, solution);
 }
 
-void bruteForceTestAll()
+void bruteForceTestAll(const TokenSwapping::Instance& instance)
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
 	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<std::vector<std::pair<int, int>>> solutions = TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -82,10 +83,8 @@ void bruteForceTestAll()
 	}
 }
 
-void compareAlgs()
+void compareAlgs(const TokenSwapping::Instance& instance)
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{4, 1, 2, 3, 5, 0}};
-
 	std::cout << "Bubble sort:" <<'\n';
 	printSolution(instance, TokenSwapping::BubbleSort::getSolution(instance));
 	std::cout << '\n';
@@ -111,9 +110,8 @@ void compareAlgs()
 	std::cout << '\n';
 }
 
-void mostSimilarOptimalSolution()
+void mostSimilarOptimalSolution(const TokenSwapping::Instance& instance)
 {
-	TokenSwapping::Instance instance{2, std::vector<int>{2, 7, 5, 6, 1, 3, 4, 0}};
 	std::vector<std::vector<std::pair<int, int>>> optimalSolutions =
 		TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	std::vector<std::pair<int, int>> solution =
