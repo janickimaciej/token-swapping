@@ -6,7 +6,7 @@
 
 namespace TokenSwapping
 {
-	int permutation2Index(const Instance& instance)
+	int Stats::permutation2Index(const Instance& instance)
 	{
 		int n = instance.size();
 		std::vector<bool> used(n, false);
@@ -21,7 +21,7 @@ namespace TokenSwapping
 		return index;
 	}
 
-	int getPositionIndex(const std::vector<bool>& used, int element)
+	int Stats::getPositionIndex(const std::vector<bool>& used, int element)
 	{
 		int index = 0;
 		for (int i = 0; i < element; ++i)
@@ -34,7 +34,7 @@ namespace TokenSwapping
 		return index;
 	}
 
-	int factorial(int n)
+	int Stats::factorial(int n)
 	{
 		int factorial = 1;
 		for (int i = 1; i <= n; ++i)
@@ -44,7 +44,7 @@ namespace TokenSwapping
 		return factorial;
 	}
 
-	int getNext(const std::vector<bool>& used, int previous)
+	int Stats::getNext(const std::vector<bool>& used, int previous)
 	{
 		int i = previous + 1;
 		for (; i < used.size(); ++i)

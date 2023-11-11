@@ -2,6 +2,7 @@
 #include "token_swapping/better_sort.hpp"
 #include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
+#include "token_swapping/database.hpp"
 #include "token_swapping/less_greedy_sort.hpp"
 #include "token_swapping/greedy_sort.hpp"
 #include "token_swapping/instance.hpp"
@@ -11,6 +12,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -22,20 +24,12 @@ void mostSimilarOptimalSolution(const TokenSwapping::Instance& instance);
 int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 	const std::vector<std::vector<std::pair<int, int>>>& solutions);
 
-void printPermutation(const TokenSwapping::Instance& instance)
-{
-	for (int i = 0; i < instance.size(); ++i)
-	{
-		std::cout << instance[i] << " ";
-	}
-	std::cout << '\n';
-}
-
 int main()
 {
-	TokenSwapping::Instance instance{2, {2, 0, 1, 3}};
 	//TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
-	TokenSwapping::iteratePermutations(5, printPermutation);
+	TokenSwapping::Instance instance{2, {1, 3, 4, 0, 2}};
+	TokenSwapping::Database database{2, instance.size()};
+	std::cout << database.optimalSolutionLength(instance) << '\n';
 	return 0;
 }
 
@@ -43,7 +37,7 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 {
 	std::cout << solution.size() << " moves" << '\n';
 	TokenSwapping::Instance instanceCopy = instance;
-#if 0
+#if 1
 	for (const std::pair<int, int>& move : solution)
 	{
 		std::cout << move.first << " <-> " << move.second << " : " <<

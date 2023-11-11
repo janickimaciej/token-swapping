@@ -6,16 +6,21 @@
 
 namespace TokenSwapping
 {
-	int permutation2Index(const Instance& instance);
-	int getPositionIndex(const std::vector<bool>& used, int element);
-	int factorial(int n);
+	class Stats
+	{
+	public:
+		static int permutation2Index(const Instance& instance);
+		template <typename Function>
+		static void iteratePermutations(int power, int size, Function& function);
+
+	private:
+		static int getPositionIndex(const std::vector<bool>& used, int element);
+		static int factorial(int n);
+		static int getNext(const std::vector<bool>& used, int previous);
+	};
 
 	template <typename Function>
-	void iteratePermutations(int size, Function function);
-	int getNext(const std::vector<bool>& used, int previous);
-
-	template <typename Function>
-	void iteratePermutations(int size, Function function)
+	void Stats::iteratePermutations(int power, int size, Function& function)
 	{
 		std::vector<int> stack;
 		std::vector<bool> used(size, false);
@@ -24,7 +29,7 @@ namespace TokenSwapping
 		{
 			if (stack.size() == size)
 			{
-				function(TokenSwapping::Instance{1, stack});
+				function(TokenSwapping::Instance{power, stack});
 				previous = stack.back();
 				stack.pop_back();
 				used[previous] = false;
