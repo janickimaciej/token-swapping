@@ -2,14 +2,17 @@
 #include "token_swapping/better_sort.hpp"
 #include "token_swapping/brute_force_sort.hpp"
 #include "token_swapping/bubble_sort.hpp"
+#include "token_swapping/database.hpp"
 #include "token_swapping/less_greedy_sort.hpp"
 #include "token_swapping/greedy_sort.hpp"
 #include "token_swapping/instance.hpp"
 #include "token_swapping/pairs_metric.hpp"
 #include "token_swapping/special_sort.hpp"
+#include "token_swapping/stats.hpp"
 
 #include <chrono>
 #include <iostream>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -23,8 +26,9 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	TokenSwapping::Instance instance{2, {0, 7, 2, 5, 3, 4, 1, 6}};
-	compareAlgs(instance);
+	//TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
+	TokenSwapping::Database database{2, 7};
+	database.generate();
 	return 0;
 }
 
@@ -32,7 +36,7 @@ void printSolution(const TokenSwapping::Instance& instance, std::vector<std::pai
 {
 	std::cout << solution.size() << " moves" << '\n';
 	TokenSwapping::Instance instanceCopy = instance;
-#if 0
+#if 1
 	for (const std::pair<int, int>& move : solution)
 	{
 		std::cout << move.first << " <-> " << move.second << " : " <<
