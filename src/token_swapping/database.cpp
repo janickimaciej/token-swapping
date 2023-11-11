@@ -19,12 +19,20 @@ namespace TokenSwapping
 	void Database::generate()
 	{
 		m_oFile.open(path());
+		if (!m_oFile.is_open())
+		{
+			error("Database::generate: Database couldn't be created");
+		}
 		Stats::iteratePermutations(m_power, m_size, *this);
 		m_oFile.close();
 	}
 
 	int Database::optimalSolutionLength(const Instance& instance)
 	{
+		if (instance.power() != m_power)
+		{
+			error("Database::optimalSolutionLength: Incompatible instance power");
+		}
 		if (instance.size() != m_size)
 		{
 			error("Database::optimalSolutionLength: Incompatible instance size");

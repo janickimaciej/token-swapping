@@ -27,9 +27,8 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 int main()
 {
 	//TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
-	TokenSwapping::Instance instance{2, {1, 3, 4, 0, 2}};
-	TokenSwapping::Database database{2, instance.size()};
-	std::cout << database.optimalSolutionLength(instance) << '\n';
+	TokenSwapping::Database database{2, 7};
+	database.generate();
 	return 0;
 }
 
