@@ -13,6 +13,7 @@
     <ClCompile Include="src\token_swapping\less_greedy_sort.cpp" />
     <ClCompile Include="src\token_swapping\better_reverse_triples.cpp" />
     <ClCompile Include="src\token_swapping\better_less_greedy_sort.cpp" />
+    <ClCompile Include="src\token_swapping\stats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
@@ -28,5 +29,6 @@
     <ClInclude Include="src\token_swapping\less_greedy_sort.hpp" />
     <ClInclude Include="src\token_swapping\better_reverse_triples.hpp" />
     <ClInclude Include="src\token_swapping\better_less_greedy_sort.hpp" />
+    <ClInclude Include="src\token_swapping\stats.hpp" />
   </ItemGroup>
 </Project>
