@@ -15,7 +15,6 @@ namespace TokenSwapping
 
 	private:
 		static int getPositionIndex(const std::vector<bool>& used, int element);
-		static int factorial(int n);
 		static int getNext(const std::vector<bool>& used, int previous);
 	};
 

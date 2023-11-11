@@ -1,6 +1,7 @@
 #include "token_swapping/stats.hpp"
 
 #include "token_swapping/instance.hpp"
+#include "utils.hpp"
 
 #include <vector>
 
@@ -32,16 +33,6 @@ namespace TokenSwapping
 			}
 		}
 		return index;
-	}
-
-	int Stats::factorial(int n)
-	{
-		int factorial = 1;
-		for (int i = 1; i <= n; ++i)
-		{
-			factorial *= i;
-		}
-		return factorial;
 	}
 
 	int Stats::getNext(const std::vector<bool>& used, int previous)
