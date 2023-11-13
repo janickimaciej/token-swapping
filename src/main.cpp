@@ -6,6 +6,7 @@
 #include "token_swapping/database.hpp"
 #include "token_swapping/less_greedy_sort.hpp"
 #include "token_swapping/greedy_sort.hpp"
+#include "token_swapping/independent_sort.hpp"
 #include "token_swapping/instance.hpp"
 #include "token_swapping/pairs_metric.hpp"
 #include "token_swapping/special_sort.hpp"
@@ -38,8 +39,9 @@ void runTest()
 {
 	int power = 2;
 	int size = 7;
-	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BetterLessGreedySort::getSolution};
+	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BruteForceSort::getSolution};
 	algStats.runTest();
+	std::cout << algStats.getFailedCount() << " / " << factorial(size) << " failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << factorial(size) << " are optimal\n";
 	std::cout << algStats.getRatioAverage() << " times worse than optimal on average on non-zero-length solutions\n";
 }
@@ -91,7 +93,7 @@ void bruteForceTestAll(const TokenSwapping::Instance& instance)
 	int count = solutionWithOnlyNegativeMovesCount(instance, solutions);
 	std::cout << "of which " << count << " have only negative moves" << "\n\n";
 
-	for (int i = 0; i < 0; ++i)
+	for (int i = 0; i < 8; ++i)
 	{
 		std::cout << "solutions[" << i << "]:\n";
 		printSolution(instance, solutions[i]);
@@ -131,7 +133,7 @@ void mostSimilarOptimalSolution(const TokenSwapping::Instance& instance)
 	std::vector<std::vector<std::pair<int, int>>> optimalSolutions =
 		TokenSwapping::BruteForceSort::getAllSolutions(instance);
 	std::vector<std::pair<int, int>> solution =
-		TokenSwapping::BetterLessGreedySort::getSolution(instance);
+		TokenSwapping::IndependentSort::getSolution(instance);
 	
 	std::vector<std::pair<int, int>> mostSimilar;
 	int similarity = -1;

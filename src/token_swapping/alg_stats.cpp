@@ -24,6 +24,11 @@ namespace TokenSwapping
 		Stats::iteratePermutations(m_power, m_size, *this);
 	}
 
+	int AlgStats::getFailedCount() const
+	{
+		return m_failed;
+	}
+
 	int AlgStats::getOptimalCount() const
 	{
 		return m_optimalCount;
@@ -37,8 +42,14 @@ namespace TokenSwapping
 	void AlgStats::operator()(const Instance& instance)
 	{
 		int optimalSolutionLength = m_database.optimalSolutionLength(instance);
-		int solutionLength = m_function(instance).size();
-		if (solutionLength == optimalSolutionLength)
+		std::vector<std::pair<int, int>> solution = m_function(instance);
+		bool failed = !instance.isSolution(solution);
+		if (failed)
+		{
+			++m_failed;
+		}
+		int solutionLength = solution.size();
+		if (!failed && solutionLength == optimalSolutionLength)
 		{
 			++m_optimalCount;
 		}

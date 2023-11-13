@@ -15,6 +15,7 @@ namespace TokenSwapping
 		AlgStats(int power, int size,
 			std::function<std::vector<std::pair<int, int>>(Instance)> function);
 		void runTest();
+		int getFailedCount() const;
 		int getOptimalCount() const;
 		double getRatioAverage() const;
 		void operator()(const Instance& instance);
@@ -23,6 +24,7 @@ namespace TokenSwapping
 		int m_power{};
 		int m_size{};
 		std::function<std::vector<std::pair<int, int>>(Instance)> m_function{};
+		int m_failed = 0;
 		int m_optimalCount = 0;
 		double m_ratioCumulative = 0;
 		int m_nonZeroCount = 0;

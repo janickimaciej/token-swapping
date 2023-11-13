@@ -3,7 +3,7 @@
 #include "token_swapping/instance.hpp"
 
 #include <vector>
-
+#include <iostream> //tmp
 namespace TokenSwapping
 {
 	class Stats
@@ -24,8 +24,15 @@ namespace TokenSwapping
 		std::vector<int> stack;
 		std::vector<bool> used(size, false);
 		int previous = -1;
+		//tmp b
+		int asdf = 0;
+		//tmp e
 		while (true)
 		{
+			if (!(++asdf % 100))//tmp b
+			{
+				std::cout << asdf << std::endl;
+			}//tmp e
 			if (stack.size() == size)
 			{
 				function(TokenSwapping::Instance{power, stack});
