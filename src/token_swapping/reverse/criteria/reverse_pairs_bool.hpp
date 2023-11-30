@@ -7,11 +7,11 @@
 
 namespace TokenSwapping
 {
-	class IndependentReverseTriplets : public Criterion
+	class ReversePairsBool : public Criterion
 	{
 	public:
 		virtual int score(Instance instance, const std::pair<int, int>& move) const override;
 		virtual bool isPositive() const override;
-		virtual ~IndependentReverseTriplets() = default;
+		virtual ~ReversePairsBool() = default;
 	};
 };

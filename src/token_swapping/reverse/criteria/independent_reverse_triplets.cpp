@@ -6,8 +6,9 @@
 
 namespace TokenSwapping
 {
-	int IndependentReverseTriplets::count(const Instance& instance)
+	int IndependentReverseTriplets::score(Instance instance, const std::pair<int, int>& move) const
 	{
+		instance.swap(move);
 		std::vector<std::array<int, 3>> triplets;
 		for (int i = 0; i < instance.size() - 2; ++i)
 		{
@@ -45,11 +46,8 @@ namespace TokenSwapping
 		return triplets.size();
 	}
 
-	int IndependentReverseTriplets::changeInCount(Instance instance, const std::pair<int, int>& move)
+	bool IndependentReverseTriplets::isPositive() const
 	{
-		int countBefore = count(instance);
-		instance.swap(move);
-		int countAfter = count(instance);
-		return countAfter - countBefore;
+		return true;
 	}
 };

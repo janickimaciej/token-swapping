@@ -132,14 +132,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\token_swapping\alg_stats.cpp" />
-    <ClCompile Include="src\token_swapping\reverse\algs\independent_reverse_triplets_sort.cpp" />
+    <ClCompile Include="src\token_swapping\reverse\algs\criteria_alg.cpp" />
+    <ClCompile Include="src\token_swapping\reverse\criteria\criteria.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\independent_reverse_triplets.cpp" />
+    <ClCompile Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.cpp" />
     <ClCompile Include="src\token_swapping\triplets\better_sort.cpp" />
     <ClCompile Include="src\token_swapping\database.cpp" />
-    <ClCompile Include="src\token_swapping\reverse\algs\reverse_pairs_sort.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\max_independent_reverse_triplets.cpp" />
-    <ClCompile Include="src\token_swapping\reverse\algs\max_independent_reverse_triplets_sort.cpp" />
-    <ClCompile Include="src\token_swapping\reverse\algs\reverse_triplets_sort.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\reverse_pairs.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\reverse_triplets.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -151,19 +150,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\alg_stats.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\algs\criteria_alg.hpp" />
     <ClInclude Include="src\token_swapping\reverse\algs\independent_reverse_triplets_sort.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\algs\max_independent_reverse_triplets_sort.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\algs\reverse_pairs_sort.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\algs\reverse_triplets_sort.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\criteria\criteria.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\criteria\criterion.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\independent_reverse_triplets.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort_one.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.hpp" />
     <ClInclude Include="src\token_swapping\triplets\better_sort.hpp" />
     <ClInclude Include="src\token_swapping\brute_force_sort.hpp" />
     <ClInclude Include="src\token_swapping\bubble_sort.hpp" />
     <ClInclude Include="src\token_swapping\database.hpp" />
-    <ClInclude Include="src\token_swapping\reverse\algs\reverse_pairs_sort.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\max_independent_reverse_triplets.hpp" />
-    <ClInclude Include="src\token_swapping\reverse\algs\max_independent_reverse_triplets_sort.hpp" />
     <ClInclude Include="src\token_swapping\instance.hpp" />
-    <ClInclude Include="src\token_swapping\reverse\algs\reverse_triplets_sort.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\reverse_pairs.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\reverse_triplets.hpp" />
     <ClInclude Include="src\token_swapping\stats.hpp" />

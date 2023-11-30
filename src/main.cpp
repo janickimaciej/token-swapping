@@ -3,11 +3,16 @@
 #include "token_swapping/bubble_sort.hpp"
 #include "token_swapping/database.hpp"
 #include "token_swapping/instance.hpp"
+#include "token_swapping/reverse/algs/criteria_alg.hpp"
 #include "token_swapping/reverse/algs/independent_reverse_triplets_sort.hpp"
 #include "token_swapping/reverse/algs/max_independent_reverse_triplets_sort.hpp"
 #include "token_swapping/reverse/algs/reverse_pairs_sort.hpp"
 #include "token_swapping/reverse/algs/reverse_triplets_sort.hpp"
+#include "token_swapping/reverse/criteria/independent_reverse_triplets.hpp"
+#include "token_swapping/reverse/criteria/max_independent_reverse_triplets.hpp"
+#include "token_swapping/reverse/criteria/reverse_pairs_bool.hpp"
 #include "token_swapping/reverse/criteria/reverse_pairs.hpp"
+#include "token_swapping/reverse/criteria/reverse_triplets.hpp"
 #include "token_swapping/stats.hpp"
 #include "token_swapping/triplets/better_sort.hpp"
 #include "utils.hpp"
@@ -30,7 +35,7 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	//TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
+	TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
 	runTest();
 	return 0;
 }
@@ -39,7 +44,15 @@ void runTest()
 {
 	int power = 2;
 	int size = 7;
-	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BruteForceSort::getSolution};
+	
+	TokenSwapping::Criteria criteria;
+	criteria.add<TokenSwapping::ReversePairsBool>();
+	criteria.add<TokenSwapping::IndependentReverseTriplets>();
+	criteria.add<TokenSwapping::ReversePairs>();
+	TokenSwapping::AlgStats algStats{power, size, criteria};
+
+	//TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BetterSort::getSolution};
+
 	algStats.runTest();
 	std::cout << algStats.getFailedCount() << " / " << factorial(size) << " failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << factorial(size) << " are optimal\n";
@@ -56,7 +69,7 @@ void printSolution(const TokenSwapping::Instance& instance,
 	for (const std::pair<int, int>& move : solution)
 	{
 		std::cout << move.first << " <-> " << move.second << " : " <<
-			TokenSwapping::ReversePairs::changeInCount(instanceCopy, move) << '\n';
+			TokenSwapping::ReversePairs::changeInDistance(instanceCopy, move) << '\n';
 		instanceCopy.swap(move);
 	}
 #endif
@@ -108,35 +121,47 @@ void bruteForceTestAll(const TokenSwapping::Instance& instance)
 
 void compareAlgs(const TokenSwapping::Instance& instance)
 {
-	std::cout << "Bubble sort:" <<'\n';
+	std::cout << "Bubble sort:\n";
 	printSolution(instance, TokenSwapping::BubbleSort::getSolution(instance));
 	std::cout << '\n';
 
-	std::cout << "Greedy sort:" <<'\n';
+	std::cout << "ReversePairs:\n";
 	printSolution(instance, TokenSwapping::ReversePairsSort::getSolution(instance));
 	std::cout << '\n';
 
-	std::cout << "Less greedy sort:" <<'\n';
+	std::cout << "ReversePairs + ReverseTriplets:\n";
 	printSolution(instance, TokenSwapping::ReverseTripletsSort::getSolution(instance));
 	std::cout << '\n';
+	
+	std::cout << "ReversePairs + IndependentReverseTriplets:\n";
+	printSolution(instance, TokenSwapping::IndependentReverseTripletsSort::getSolution(instance));
+	std::cout << '\n';
+	
+	std::cout << "ReversePairs + MaxIndependentReverseTriplets:\n";
+	printSolution(instance, TokenSwapping::MaxIndependentReverseTripletsSort::getSolution(instance));
+	std::cout << '\n';
 
-	std::cout << "Better sort:" <<'\n';
+	std::cout << "Better sort:\n";
 	printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
 	std::cout << '\n';
 
-	std::cout << "Better less greedy sort:" <<'\n';
-	printSolution(instance, TokenSwapping::IndependentReverseTripletsSort::getSolution(instance));
-	std::cout << '\n';
-
-	std::cout << "Brute force sort:" <<'\n';
+	std::cout << "Brute force sort:\n";
 	printSolution(instance, TokenSwapping::BruteForceSort::getSolution(instance));
 	std::cout << '\n';
+
+	std::cout << "Experimental:\n";
+	TokenSwapping::Criteria criteria;
+	criteria.add<TokenSwapping::ReversePairsBool>();
+	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
+	criteria.add<TokenSwapping::ReversePairs>();
+	printSolution(instance, TokenSwapping::CriteriaAlg::getSolution(instance, criteria));
 }
 
 void mostSimilarOptimalSolution(const TokenSwapping::Instance& instance)
 {
 	std::vector<std::vector<std::pair<int, int>>> optimalSolutions =
 		TokenSwapping::BruteForceSort::getAllSolutions(instance);
+	
 	std::vector<std::pair<int, int>> solution =
 		TokenSwapping::MaxIndependentReverseTripletsSort::getSolution(instance);
 	
@@ -169,10 +194,10 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 	{
 		bool onlyNegative = true;
 		TokenSwapping::Instance instanceCopy = instance;
+		TokenSwapping::ReversePairs reversePairs;
 		for (auto& move : solution)
 		{
-			int change = TokenSwapping::ReversePairs::changeInCount(instanceCopy, move);
-			if (change >= 0)
+			if (reversePairs.score(instanceCopy, move) >= 0)
 			{
 				onlyNegative = false;
 				break;

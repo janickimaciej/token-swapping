@@ -6,14 +6,21 @@
 
 namespace TokenSwapping
 {
-	int MaxIndependentReverseTriplets::count(const Instance& instance)
+	int MaxIndependentReverseTriplets::score(Instance instance, const std::pair<int, int>& move)
+		const
 	{
+		instance.swap(move);
 		int maximum = -1;
 		int solution = 0;
 		std::vector<std::array<int, 3>> available;
 		allTriplets(instance, available);
 		countRecursive(maximum, solution, available);
 		return maximum;
+	}
+
+	bool MaxIndependentReverseTriplets::isPositive() const
+	{
+		return true;
 	}
 
 	void MaxIndependentReverseTriplets::allTriplets(const Instance& instance,
@@ -64,14 +71,5 @@ namespace TokenSwapping
 			}
 			countRecursive(maximum, solution + 1, newAvailable);
 		}
-	}
-
-	int MaxIndependentReverseTriplets::changeInCount(Instance instance,
-		const std::pair<int, int>& move)
-	{
-		int countBefore = count(instance);
-		instance.swap(move);
-		int countAfter = count(instance);
-		return countAfter - countBefore;
 	}
 };

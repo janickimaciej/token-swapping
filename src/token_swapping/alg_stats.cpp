@@ -3,6 +3,8 @@
 #include "token_swapping/database.hpp"
 #include "token_swapping/instance.hpp"
 #include "token_swapping/stats.hpp"
+#include "token_swapping/reverse/algs/criteria_alg.hpp"
+#include "token_swapping/reverse/criteria/criteria.hpp"
 #include "utils.hpp"
 
 #include <functional>
@@ -16,6 +18,19 @@ namespace TokenSwapping
 		m_power{power},
 		m_size{size},
 		m_function{function},
+		m_database{power, size}
+	{ }
+
+	AlgStats::AlgStats(int power, int size, const Criteria& criteria) :
+		m_power{power},
+		m_size{size},
+		m_function
+		{
+			[&criteria](Instance instance)
+			{
+				return CriteriaAlg::getSolution(instance, criteria);
+			}
+		},
 		m_database{power, size}
 	{ }
 

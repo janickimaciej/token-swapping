@@ -2,6 +2,7 @@
 
 #include "token_swapping/database.hpp"
 #include "token_swapping/instance.hpp"
+#include "token_swapping/reverse/criteria/criteria.hpp"
 
 #include <functional>
 #include <utility>
@@ -14,6 +15,7 @@ namespace TokenSwapping
 	public:
 		AlgStats(int power, int size,
 			std::function<std::vector<std::pair<int, int>>(Instance)> function);
+		AlgStats(int power, int size, const Criteria& criteria);
 		void runTest();
 		int getFailedCount() const;
 		int getOptimalCount() const;
