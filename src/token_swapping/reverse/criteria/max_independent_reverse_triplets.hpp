@@ -6,18 +6,18 @@
 
 namespace TokenSwapping
 {
-	class IndependentReverseTriples
+	class MaxIndependentReverseTriplets
 	{
 	public:
-		IndependentReverseTriples() = delete;
+		MaxIndependentReverseTriplets() = delete;
 
 		static int count(const Instance& instance);
-		static void allTriples(const Instance& instance,
+		static void allTriplets(const Instance& instance,
 			std::vector<std::array<int, 3>>& allTriples);
 		static void countRecursive(int& maximum, int solution,
 			const std::vector<std::array<int, 3>>& available);
 		static int changeInCount(Instance instance, const std::pair<int, int>& move);
 
-		~IndependentReverseTriples() = delete;
+		~MaxIndependentReverseTriplets() = delete;
 	};
 };

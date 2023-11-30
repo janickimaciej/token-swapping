@@ -11,7 +11,8 @@ namespace TokenSwapping
 
 		for (int maxDepth = 0; !solutionFound; ++maxDepth)
 		{
-			getSolutionRecursive(instance, solutionFound, solution, maxDepth, std::make_pair(-1, -1));
+			getSolutionRecursive(instance, solutionFound, solution, maxDepth,
+				std::make_pair(-1, -1));
 		}
 
 		return solution;
@@ -24,7 +25,8 @@ namespace TokenSwapping
 
 		for (int maxDepth = 0; solutions.size() == 0; ++maxDepth)
 		{
-			getAllSolutionsRecursive(instance, solutions, solution, maxDepth, std::make_pair(-1, -1));
+			getAllSolutionsRecursive(instance, solutions, solution, maxDepth,
+				std::make_pair(-1, -1));
 		}
 
 		return solutions;

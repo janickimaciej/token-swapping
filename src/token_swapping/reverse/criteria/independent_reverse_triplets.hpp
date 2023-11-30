@@ -6,14 +6,14 @@
 
 namespace TokenSwapping
 {
-	class BetterReverseTriples
+	class IndependentReverseTriplets
 	{
 	public:
-		BetterReverseTriples() = delete;
+		IndependentReverseTriplets() = delete;
 
 		static int count(const Instance& instance);
 		static int changeInCount(Instance instance, const std::pair<int, int>& move);
 
-		~BetterReverseTriples() = delete;
+		~IndependentReverseTriplets() = delete;
 	};
 };

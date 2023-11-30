@@ -1,10 +1,10 @@
-#include "token_swapping/reverse_triples.hpp"
+#include "token_swapping/reverse/criteria/reverse_triplets.hpp"
 
 #include <utility>
 
 namespace TokenSwapping
 {
-	int ReverseTriples::count(const Instance& instance)
+	int ReverseTriplets::count(const Instance& instance)
 	{
 		int count = 0;
 		for (int i = 0; i < instance.size() - 2; ++i)
@@ -23,7 +23,7 @@ namespace TokenSwapping
 		return count;
 	}
 
-	int ReverseTriples::changeInCount(Instance instance, const std::pair<int, int>& move)
+	int ReverseTriplets::changeInCount(Instance instance, const std::pair<int, int>& move)
 	{
 		int countBefore = count(instance);
 		instance.swap(move);

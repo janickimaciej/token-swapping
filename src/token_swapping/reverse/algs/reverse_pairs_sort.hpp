@@ -7,13 +7,13 @@
 
 namespace TokenSwapping
 {
-	class GreedySort
+	class ReversePairsSort
 	{
 	public:
-		GreedySort() = delete;
+		ReversePairsSort() = delete;
 
 		static std::vector<std::pair<int, int>> getSolution(Instance instance);
 
-		~GreedySort() = delete;
+		~ReversePairsSort() = delete;
 	};
 };

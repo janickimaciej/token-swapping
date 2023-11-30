@@ -6,14 +6,14 @@
 
 namespace TokenSwapping
 {
-	class PairsMetric
+	class ReversePairs
 	{
 	public:
-		PairsMetric() = delete;
+		ReversePairs() = delete;
 
 		static int distanceFromSolved(const Instance& instance);
-		static int changeInDistance(const Instance& instance, const std::pair<int, int>& move);
+		static int changeInCount(const Instance& instance, const std::pair<int, int>& move);
 
-		~PairsMetric() = delete;
+		~ReversePairs() = delete;
 	};
 };

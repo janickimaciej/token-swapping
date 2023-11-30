@@ -7,17 +7,17 @@
 
 namespace TokenSwapping
 {
-	class IndependentSort
+	class ReverseTripletsSort
 	{
 	public:
-		IndependentSort() = delete;
+		ReverseTripletsSort() = delete;
 
 		static std::vector<std::pair<int, int>> getSolution(Instance instance);
 
-		~IndependentSort() = delete;
+		~ReverseTripletsSort() = delete;
 
 	private:
 		static void checkBestMove(const Instance& instance, const std::pair<int, int>& move,
-			int changeInDistance, std::pair<int, int>& bestMove, int& maxChangeInReverseTriples);
+			int changeInDistance, std::pair<int, int>& bestMove, int& maxChangeInReverseTriplets);
 	};
 };
