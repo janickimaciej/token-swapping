@@ -30,7 +30,10 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	//TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
+	//TokenSwapping::Instance instance{2, {6,1,4,2,3,0,5}};
+	//printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
+	//printSolution(instance, TokenSwapping::BetterLessGreedySort::getSolution(instance));
+	
 	runTest();
 	return 0;
 }
@@ -39,7 +42,7 @@ void runTest()
 {
 	int power = 2;
 	int size = 7;
-	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BruteForceSort::getSolution};
+	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BubbleSort::getSolution};
 	algStats.runTest();
 	std::cout << algStats.getFailedCount() << " / " << factorial(size) << " failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << factorial(size) << " are optimal\n";

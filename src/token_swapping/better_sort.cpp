@@ -9,6 +9,11 @@ namespace TokenSwapping
 	std::vector<std::pair<int, int>> BetterSort::getSolution(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
+		if (instance.size() == 2) {
+			instance.swap(0, 1);
+			solution.push_back(std::pair<int, int>{0, 1});
+			return solution;
+		}
 		for (int n = 0; n < instance.size();++n) {
 			for (int i = 1; i < instance.size() - 1; ++i)
 			{
@@ -74,56 +79,66 @@ namespace TokenSwapping
 		// Zamiana miejscami pozosta³ych niepasuj¹cych
 		std::vector<int> not_on_place;
 		for (int i = 0; i < instance.size();++i) {
-			if (instance[i] != i)
-				not_on_place.push_back(i);
-		}
-
-		std::vector<std::pair<int, int>> not_on_place_pairs;
-		for (int k= 0;k < not_on_place.size();k++) {
-			for (int l = 0;l < not_on_place.size();l++) {
-				if (k == l)
-					continue;
-				if (not_on_place[k] == instance[not_on_place[l]] && not_on_place[l] == instance[not_on_place[k]]) {
-					not_on_place_pairs.push_back(std::pair<int, int>{not_on_place[k], not_on_place[l]});
-				}
-
+			if (instance[i] != i) {
+				not_on_place.push_back(instance[i]);
 			}
 		}
 
-		for (int j = 0; j < not_on_place_pairs.size();j++) {
-			int idx1 = not_on_place_pairs[j].first;
-			int idx2 = not_on_place_pairs[j].second;
+		if (not_on_place.size() == 0)
+			return solution;
 
-			if (idx1 == instance[idx2] && idx2 == instance[idx1]) {
-				int distance = idx2 - idx1;
-				int steps = distance / 2;
-				int t = idx1;
+		std::vector<int> not_on_place_new = not_on_place;
+		std::vector<int> temp = not_on_place;
+		std::sort(temp.begin(), temp.end());
+
+		for (int i = 0; i < not_on_place.size();++i) {
+			for (int j = 0;j < not_on_place.size();++j) {
+				if (not_on_place[i] == temp[j]) {
+					not_on_place_new[i] = j;
+					break;
+				}
+			}
+		}
+
+		Instance newInstance(not_on_place_new.size() > 2 ? 2 : 1, not_on_place_new);
+		std::vector<std::pair<int, int>> swaps = getSolution(newInstance);
+		for (std::pair<int, int> swap : swaps) {
+			int idx1 = not_on_place[swap.first];
+			int idx2 = not_on_place[swap.second];
+			if (idx2 < idx1) {
+				int temp = idx1;
+				idx1 = idx2;
+				idx2 = temp;
+			}
+
+			int distance = idx2 - idx1;
+			int steps = distance / 2;
+			int t = idx1;
+			while (steps > 0) {
+				instance.swap(t, t + 2);
+				solution.push_back(std::pair<int, int>{t, t + 2});
+				t = t + 2;
+				steps--;
+			}
+			if (distance % 2 == 1) {
+				instance.swap(t, t + 1);
+				solution.push_back(std::pair<int, int>{t, t + 1});
+				steps = distance / 2;
 				while (steps > 0) {
-					instance.swap(t, t + 2);
-					solution.push_back(std::pair<int, int>{t, t + 2});
-					t = t + 2;
+					instance.swap(t - 2, t);
+					solution.push_back(std::pair<int, int>{t - 2, t});
+					t = t - 2;
 					steps--;
 				}
-				if (distance % 2 == 1) {
-					instance.swap(t, t + 1);
-					solution.push_back(std::pair<int, int>{t, t + 1});
-					steps = distance / 2;
-					while (steps > 0) {
-						instance.swap(t - 2, t);
-						solution.push_back(std::pair<int, int>{t - 2, t});
-						t = t - 2;
-						steps--;
-					}
-				}
-				else {
-					steps = distance / 2 - 1;
+			}
+			else {
+				steps = distance / 2 - 1;
+				t = t - 2;
+				while (steps > 0) {
+					instance.swap(t - 2, t);
+					solution.push_back(std::pair<int, int>{t - 2, t});
 					t = t - 2;
-					while (steps > 0) {
-						instance.swap(t - 2, t);
-						solution.push_back(std::pair<int, int>{t - 2, t});
-						t = t - 2;
-						steps--;
-					}
+					steps--;
 				}
 			}
 		}
