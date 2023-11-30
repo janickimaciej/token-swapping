@@ -42,7 +42,7 @@ void runTest()
 {
 	int power = 2;
 	int size = 7;
-	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BubbleSort::getSolution};
+	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BetterSort::getSolution};
 	algStats.runTest();
 	std::cout << algStats.getFailedCount() << " / " << factorial(size) << " failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << factorial(size) << " are optimal\n";
