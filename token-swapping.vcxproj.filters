@@ -10,13 +10,12 @@
     <ClCompile Include="src\token_swapping\reverse\criteria\reverse_triplets.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\independent_reverse_triplets.cpp" />
     <ClCompile Include="src\token_swapping\stats.cpp" />
-    <ClCompile Include="src\token_swapping\database.cpp" />
-    <ClCompile Include="src\token_swapping\alg_stats.cpp" />
-    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\token_swapping\utils.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\max_independent_reverse_triplets.cpp" />
     <ClCompile Include="src\token_swapping\reverse\algs\criteria_alg.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\criteria.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.cpp" />
+    <ClCompile Include="src\token_swapping\reverse\criteria\generators.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
@@ -31,7 +30,7 @@
     <ClInclude Include="src\token_swapping\stats.hpp" />
     <ClInclude Include="src\token_swapping\database.hpp" />
     <ClInclude Include="src\token_swapping\alg_stats.hpp" />
-    <ClInclude Include="src\utils.hpp" />
+    <ClInclude Include="src\token_swapping\utils.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\max_independent_reverse_triplets.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\criterion.hpp" />
     <ClInclude Include="src\token_swapping\reverse\algs\criteria_alg.hpp" />
@@ -41,5 +40,7 @@
     <ClInclude Include="src\token_swapping\reverse\algs\max_independent_reverse_triplets_sort.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\criteria.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.hpp" />
+    <ClInclude Include="src\token_swapping\reverse\criteria\generators.hpp" />
+    <ClInclude Include="src\token_swapping\database_tree.hpp" />
   </ItemGroup>
 </Project>

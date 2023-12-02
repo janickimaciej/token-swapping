@@ -9,13 +9,14 @@
 #include "token_swapping/reverse/algs/reverse_pairs_sort.hpp"
 #include "token_swapping/reverse/algs/reverse_triplets_sort.hpp"
 #include "token_swapping/reverse/criteria/independent_reverse_triplets.hpp"
+#include "token_swapping/reverse/criteria/generators.hpp"
 #include "token_swapping/reverse/criteria/max_independent_reverse_triplets.hpp"
 #include "token_swapping/reverse/criteria/reverse_pairs_bool.hpp"
 #include "token_swapping/reverse/criteria/reverse_pairs.hpp"
 #include "token_swapping/reverse/criteria/reverse_triplets.hpp"
 #include "token_swapping/stats.hpp"
 #include "token_swapping/triplets/better_sort.hpp"
-#include "utils.hpp"
+#include "token_swapping/utils.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -35,27 +36,30 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	TokenSwapping::Instance instance{2, {6, 1, 4, 2, 3, 0, 5}};
-	runTest();
+	//TokenSwapping::Instance instance{2, {2, 3, 5, 0, 4, 1}};
+	TokenSwapping::Database<7> database{2};
+	database.generate();
 	return 0;
 }
 
 void runTest()
 {
-	int power = 2;
-	int size = 7;
+	constexpr int power = 2;
+	constexpr int size = 7;
 	
 	TokenSwapping::Criteria criteria;
-	criteria.add<TokenSwapping::ReversePairsBool>();
-	criteria.add<TokenSwapping::IndependentReverseTriplets>();
 	criteria.add<TokenSwapping::ReversePairs>();
-	TokenSwapping::AlgStats algStats{power, size, criteria};
+	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
+	criteria.add<TokenSwapping::Generators>();
+	TokenSwapping::AlgStats<size> algStats{power, criteria};
 
-	//TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BetterSort::getSolution};
+	//TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::BetterSort::getSolution};
 
 	algStats.runTest();
-	std::cout << algStats.getFailedCount() << " / " << factorial(size) << " failed\n";
-	std::cout << algStats.getOptimalCount() << " / " << factorial(size) << " are optimal\n";
+	std::cout << algStats.getFailedCount() << " / " << TokenSwapping::factorial(size) <<
+		" failed\n";
+	std::cout << algStats.getOptimalCount() << " / " << TokenSwapping::factorial(size) <<
+		" are optimal\n";
 	std::cout << algStats.getRatioAverage() <<
 		" times worse than optimal on average on non-zero-length solutions\n";
 }
@@ -111,7 +115,9 @@ void bruteForceTestAll(const TokenSwapping::Instance& instance)
 	int count = solutionWithOnlyNegativeMovesCount(instance, solutions);
 	std::cout << "of which " << count << " have only negative moves" << "\n\n";
 
-	for (int i = 0; i < 8; ++i)
+	constexpr int maxDisplayed = 10;
+	int displayed = solutions.size() < maxDisplayed ? solutions.size() : maxDisplayed;
+	for (int i = 0; i < displayed; ++i)
 	{
 		std::cout << "solutions[" << i << "]:\n";
 		printSolution(instance, solutions[i]);
@@ -151,9 +157,9 @@ void compareAlgs(const TokenSwapping::Instance& instance)
 
 	std::cout << "Experimental:\n";
 	TokenSwapping::Criteria criteria;
-	criteria.add<TokenSwapping::ReversePairsBool>();
-	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
 	criteria.add<TokenSwapping::ReversePairs>();
+	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
+	criteria.add<TokenSwapping::Generators>();
 	printSolution(instance, TokenSwapping::CriteriaAlg::getSolution(instance, criteria));
 }
 

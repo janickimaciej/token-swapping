@@ -25,6 +25,16 @@ namespace TokenSwapping
 		}
 	}
 
+	Instance::Instance(int power, const Instance& instance) :
+		m_power{power},
+		m_tokens{instance.m_tokens}
+	{
+		if (power <= 0 || power >= m_tokens.size())
+		{
+			error("Instance::Instance: Invalid power");
+		}
+	}
+
 	int Instance::power() const
 	{
 		return m_power;

@@ -9,6 +9,7 @@ namespace TokenSwapping
 	{
 	public:
 		Instance(int power, std::vector<int> tokens);
+		Instance(int power, const Instance& instance);
 
 		int power() const;
 		int size() const;

@@ -1,6 +1,7 @@
 #include "token_swapping/brute_force_sort.hpp"
 
 #include "token_swapping/bubble_sort.hpp"
+#include "token_swapping/utils.hpp"
 
 namespace TokenSwapping
 {
@@ -33,8 +34,7 @@ namespace TokenSwapping
 	}
 
 	void BruteForceSort::getSolutionRecursive(Instance& instance, bool& solutionFound,
-		std::vector<std::pair<int, int>>& solution, int maxDepth,
-		std::pair<int, int> lastSwap)
+		std::vector<std::pair<int, int>>& solution, int maxDepth, std::pair<int, int> lastSwap)
 	{
 		if (instance.isSolved())
 		{
