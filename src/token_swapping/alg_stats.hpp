@@ -23,6 +23,7 @@ namespace TokenSwapping
 		int getFailedCount() const;
 		int getOptimalCount() const;
 		double getRatioAverage() const;
+		double getWorstRatio() const;
 		void operator()(const Instance& instance);
 
 	private:
@@ -32,6 +33,7 @@ namespace TokenSwapping
 		int m_optimalCount = 0;
 		double m_ratioCumulative = 0;
 		int m_nonZeroCount = 0;
+		double m_worstRatio = 1;
 		Database<size> m_database;
 	};
 
@@ -77,7 +79,13 @@ namespace TokenSwapping
 	template <int size>
 	double AlgStats<size>::getRatioAverage() const
 	{
-		return m_ratioCumulative / m_nonZeroCount;
+		return m_nonZeroCount != 0 ? m_ratioCumulative / m_nonZeroCount : 1;
+	}
+
+	template <int size>
+	double AlgStats<size>::getWorstRatio() const
+	{
+		return m_worstRatio;
 	}
 
 	template <int size>
@@ -99,10 +107,15 @@ namespace TokenSwapping
 		//{
 		//	solution.size();
 		//}
-		if (optimalSolutionLength != 0)
+		if (optimalSolutionLength != solutionLength)
 		{
-			m_ratioCumulative += (double)solutionLength / optimalSolutionLength;
+			double ratio = (double)solutionLength / optimalSolutionLength;
+			m_ratioCumulative += ratio;
 			++m_nonZeroCount;
+			if (ratio > m_worstRatio)
+			{
+				m_worstRatio = ratio;
+			}
 		}
 	}
 };

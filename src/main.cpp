@@ -37,20 +37,22 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 int main()
 {
 	//TokenSwapping::Instance instance{2, {2, 3, 5, 0, 4, 1}};
-	TokenSwapping::Database<7> database{2};
-	database.generate();
+	//TokenSwapping::Database<9> database{2};
+	//database.generate();
+	runTest();
 	return 0;
 }
 
 void runTest()
 {
 	constexpr int power = 2;
-	constexpr int size = 7;
+	constexpr int size = 9;
 	
 	TokenSwapping::Criteria criteria;
 	criteria.add<TokenSwapping::ReversePairs>();
+	//criteria.add<TokenSwapping::IndependentReverseTriplets>();
 	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
-	criteria.add<TokenSwapping::Generators>();
+	//criteria.add<TokenSwapping::Generators>();
 	TokenSwapping::AlgStats<size> algStats{power, criteria};
 
 	//TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::BetterSort::getSolution};
@@ -61,7 +63,9 @@ void runTest()
 	std::cout << algStats.getOptimalCount() << " / " << TokenSwapping::factorial(size) <<
 		" are optimal\n";
 	std::cout << algStats.getRatioAverage() <<
-		" times worse than optimal on average on non-zero-length solutions\n";
+		" times worse than optimal on average on non-optimal solutions\n";
+	std::cout << algStats.getWorstRatio() <<
+		" times worse than optimal in the worst case\n";
 }
 
 void printSolution(const TokenSwapping::Instance& instance,

@@ -30,6 +30,7 @@ namespace TokenSwapping
 			if (stack.size() == size)
 			{
 				Instance instance{power, stack};
+				instance.print();
 				int permutationIndex = permutation2Index(instance);
 				if (permutationIndex >= to)
 				{

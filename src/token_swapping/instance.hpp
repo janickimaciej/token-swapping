@@ -10,6 +10,7 @@ namespace TokenSwapping
 	public:
 		Instance(int power, std::vector<int> tokens);
 		Instance(int power, const Instance& instance);
+		static Instance getSortedInstance(int size, int power);
 
 		int power() const;
 		int size() const;
@@ -20,6 +21,8 @@ namespace TokenSwapping
 
 		void swap(int firstIndex, int secondIndex);
 		void swap(const std::pair<int, int>& move);
+
+		void print() const;
 
 	private:
 		int m_power;

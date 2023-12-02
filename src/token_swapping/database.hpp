@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <queue>
 #include <string>
 #include <vector>
 
@@ -28,10 +29,11 @@ namespace TokenSwapping
 	private:
 		int m_power;
 		int m_fieldWidth{};
-		DatabaseTree<size> databaseTree;
+		DatabaseTree<size> m_databaseTree{};
 		std::ofstream m_oFile{};
 		std::ifstream m_iFile{};
 
+		void populateDatabaseTree();
 		std::string path() const;
 		std::string path(int from, int to) const;
 		void error(const char* msg) const;
@@ -58,7 +60,8 @@ namespace TokenSwapping
 		{
 			error("Database::generate: Database couldn't be created");
 		}
-		Stats::iteratePermutations(m_power, size, *this, from, to);
+		populateDatabaseTree();
+		Stats::iteratePermutations(m_power, size, *this);
 		m_oFile.close();
 	}
 
@@ -85,19 +88,41 @@ namespace TokenSwapping
 		m_iFile.close();
 		return std::stoi(line);
 	}
-	
+
 	template <int size>
 	void Database<size>::operator()(const Instance& instance)
 	{
-#if 1
-		for (int i = 0; i < instance.size(); ++i)
+		m_oFile << std::setw(m_fieldWidth) << m_databaseTree.read(instance) << '\n';
+	}
+	
+	template <int size>
+	void Database<size>::populateDatabaseTree()
+	{
+		std::queue<Instance> queue;
+		Instance sortedInstance = Instance::getSortedInstance(size, m_power);
+		m_databaseTree.write(sortedInstance, 0);
+		sortedInstance.print();
+		queue.push(std::move(sortedInstance));
+		while (!queue.empty())
 		{
-			std::cout << instance[i] << " ";
+			Instance instance = queue.front();
+			queue.pop();
+			int distance = m_databaseTree.read(instance);
+			for (int i = 1; i <= instance.power(); ++i)
+			{
+				for (int j = 0; j < instance.size() - i; ++j)
+				{
+					Instance child = instance;
+					child.swap(j, j + i);
+					if (m_databaseTree.read(child) == -1)
+					{
+						m_databaseTree.write(child, distance + 1);
+						child.print();
+						queue.push(std::move(child));
+					}
+				}
+			}
 		}
-		std::cout << '\n';
-#endif
-		m_oFile << std::setw(m_fieldWidth) <<
-			BruteForceSort::getSolution(instance, databaseTree) << '\n';
 	}
 	
 	template <int size>
