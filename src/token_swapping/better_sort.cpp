@@ -54,17 +54,14 @@ namespace TokenSwapping
 					if (instance[i - 1] > instance[i] && !makeOnlyTwoSwap) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i-1, i}, abs(i-1 - instance[i]) + abs(i - instance[i-1])});
-						makeOnlyTwoSwap = true;
 					}
 					if (instance[i - 1] > instance[i + 1]) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i - 1, i + 1}, abs(i - 1 - instance[i+1]) + abs(i+1 - instance[i - 1])});
-						noneChanged = false;
 					}
 					if (instance[i] > instance[i + 1] && !makeOnlyTwoSwap) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i, i+1}, abs(i - instance[i+1]) + abs(i + 1 - instance[i])});
-						makeOnlyTwoSwap = true;
 					}
 				}
 				else if (not_matching_tokens.size() == 2) {
@@ -75,7 +72,6 @@ namespace TokenSwapping
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
 									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) + 
 									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
-							noneChanged = false;
 						}
 					}
 					else {
@@ -84,7 +80,6 @@ namespace TokenSwapping
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
 									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) +
 									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
-							makeOnlyTwoSwap = true;
 						}
 					}
 				}
@@ -100,15 +95,10 @@ namespace TokenSwapping
 				}
 				instance.swap(swap_pair.first, swap_pair.second);
 				solution.push_back(swap_pair);
+				noneChanged = false;
+				if (abs(swap_pair.first - swap_pair.second) == 1)
+					makeOnlyTwoSwap = true;
 			}
-
-			isSorted = true;
-			for (int h = 0;h < instance.size() - 1;h++) {
-				if (instance[h] > instance[h + 1])
-					isSorted = false;
-			}
-			if (isSorted)
-				break;
 			if (noneChanged && !makeOnlyTwoSwap)
 				break;
 			if(noneChanged)
