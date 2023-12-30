@@ -18,6 +18,7 @@ namespace TokenSwapping
 		bool isSorted = false;
 		while(true) {
 			bool noneChanged = true;
+			std::vector<std::pair<std::pair<int, int>, int>> swaps;
 			for (int i = 1; i < instance.size() - 1; ++i)
 			{
 				if (instance[i - 1] <= instance[i] && instance[i] <= instance[i + 1]) {
@@ -51,18 +52,24 @@ namespace TokenSwapping
 
 				if (not_matching_tokens.size() == 3) {
 					if (instance[i - 1] > instance[i] && !makeOnlyTwoSwap) {
-						instance.swap(i - 1, i);
-						solution.push_back(std::pair<int, int>{i - 1, i});
+						//instance.swap(i - 1, i);
+						//solution.push_back(std::pair<int, int>{i - 1, i});
+						swaps.push_back(std::pair<std::pair<int, int>, int>{
+							std::pair<int, int>{i-1, i}, abs(i-1 - instance[i]) + abs(i - instance[i-1])});
 						makeOnlyTwoSwap = true;
 					}
 					if (instance[i - 1] > instance[i + 1]) {
-						instance.swap(i - 1, i + 1);
-						solution.push_back(std::pair<int, int>{i - 1, i + 1});
+						//instance.swap(i - 1, i + 1);
+						//solution.push_back(std::pair<int, int>{i - 1, i + 1});
+						swaps.push_back(std::pair<std::pair<int, int>, int>{
+							std::pair<int, int>{i - 1, i + 1}, abs(i - 1 - instance[i+1]) + abs(i+1 - instance[i - 1])});
 						noneChanged = false;
 					}
 					if (instance[i] > instance[i + 1] && !makeOnlyTwoSwap) {
-						instance.swap(i, i + 1);
-						solution.push_back(std::pair<int, int>{i, i + 1});
+						//instance.swap(i, i + 1);
+						//solution.push_back(std::pair<int, int>{i, i + 1});
+						swaps.push_back(std::pair<std::pair<int, int>, int>{
+							std::pair<int, int>{i, i+1}, abs(i - instance[i+1]) + abs(i + 1 - instance[i])});
 						makeOnlyTwoSwap = true;
 					}
 				}
@@ -70,20 +77,41 @@ namespace TokenSwapping
 					if (makeOnlyTwoSwap) {
 						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]] && 
 							abs(not_matching_tokens[0] - not_matching_tokens[1]) == 2) {
-							instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-							solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+							//instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
+							//solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+							swaps.push_back(std::pair<std::pair<int, int>, int>{
+								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
+									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) + 
+									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
 							noneChanged = false;
 						}
 					}
 					else {
 						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
-							instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-							solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+							//instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
+							//solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+							swaps.push_back(std::pair<std::pair<int, int>, int>{
+								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
+									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) +
+									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
 							makeOnlyTwoSwap = true;
 						}
 					}
 				}
 			}
+			if (swaps.size() > 0) {
+				int min = INT_MAX;
+				std::pair<int, int> swap_pair;
+				for (int i = 0;i < swaps.size();i++) {
+					if (swaps[i].second < min) {
+						min = swaps[i].second;
+						swap_pair = swaps[i].first;
+					}
+				}
+				instance.swap(swap_pair.first, swap_pair.second);
+				solution.push_back(swap_pair);
+			}
+
 			isSorted = true;
 			for (int h = 0;h < instance.size() - 1;h++) {
 				if (instance[h] > instance[h + 1])
