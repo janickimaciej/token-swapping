@@ -6,6 +6,10 @@
 
 namespace TokenSwapping
 {
+	int w(Instance instance, int x, int y) {
+		return abs(x - instance[y]) + abs(y - instance[x]);
+	}
+
 	std::vector<std::pair<int, int>> BetterSort::getSolution(Instance instance)
 	{
 		std::vector<std::pair<int, int>> solution;
@@ -53,15 +57,15 @@ namespace TokenSwapping
 				if (not_matching_tokens.size() == 3) {
 					if (instance[i - 1] > instance[i] && !makeOnlyTwoSwap) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
-							std::pair<int, int>{i-1, i}, abs(i-1 - instance[i]) + abs(i - instance[i-1])});
+							std::pair<int, int>{i-1, i}, w(instance, i-1, i)});
 					}
 					if (instance[i - 1] > instance[i + 1]) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
-							std::pair<int, int>{i - 1, i + 1}, abs(i - 1 - instance[i+1]) + abs(i+1 - instance[i - 1])});
+							std::pair<int, int>{i - 1, i + 1}, w(instance, i - 1, i + 1)});
 					}
 					if (instance[i] > instance[i + 1] && !makeOnlyTwoSwap) {
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
-							std::pair<int, int>{i, i+1}, abs(i - instance[i+1]) + abs(i + 1 - instance[i])});
+							std::pair<int, int>{i, i+1}, w(instance, i, i + 1)});
 					}
 				}
 				else if (not_matching_tokens.size() == 2) {
@@ -70,16 +74,14 @@ namespace TokenSwapping
 							abs(not_matching_tokens[0] - not_matching_tokens[1]) == 2) {
 							swaps.push_back(std::pair<std::pair<int, int>, int>{
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
-									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) + 
-									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
+									w(instance, not_matching_tokens[0], not_matching_tokens[1])});
 						}
 					}
 					else {
 						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
 							swaps.push_back(std::pair<std::pair<int, int>, int>{
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
-									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) +
-									abs(not_matching_tokens[1] - instance[not_matching_tokens[0]])});
+									w(instance, not_matching_tokens[0], not_matching_tokens[1])});
 						}
 					}
 				}

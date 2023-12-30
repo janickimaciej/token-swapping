@@ -30,7 +30,7 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	//TokenSwapping::Instance instance{2, {2,4,5,3,1,6,0}};
+	//TokenSwapping::Instance instance{2, {2,3,6,4,0,5,1}};
 	//printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
 	//printSolution(instance, TokenSwapping::BetterLessGreedySort::getSolution(instance));
 	
