@@ -52,22 +52,16 @@ namespace TokenSwapping
 
 				if (not_matching_tokens.size() == 3) {
 					if (instance[i - 1] > instance[i] && !makeOnlyTwoSwap) {
-						//instance.swap(i - 1, i);
-						//solution.push_back(std::pair<int, int>{i - 1, i});
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i-1, i}, abs(i-1 - instance[i]) + abs(i - instance[i-1])});
 						makeOnlyTwoSwap = true;
 					}
 					if (instance[i - 1] > instance[i + 1]) {
-						//instance.swap(i - 1, i + 1);
-						//solution.push_back(std::pair<int, int>{i - 1, i + 1});
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i - 1, i + 1}, abs(i - 1 - instance[i+1]) + abs(i+1 - instance[i - 1])});
 						noneChanged = false;
 					}
 					if (instance[i] > instance[i + 1] && !makeOnlyTwoSwap) {
-						//instance.swap(i, i + 1);
-						//solution.push_back(std::pair<int, int>{i, i + 1});
 						swaps.push_back(std::pair<std::pair<int, int>, int>{
 							std::pair<int, int>{i, i+1}, abs(i - instance[i+1]) + abs(i + 1 - instance[i])});
 						makeOnlyTwoSwap = true;
@@ -77,8 +71,6 @@ namespace TokenSwapping
 					if (makeOnlyTwoSwap) {
 						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]] && 
 							abs(not_matching_tokens[0] - not_matching_tokens[1]) == 2) {
-							//instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-							//solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
 							swaps.push_back(std::pair<std::pair<int, int>, int>{
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
 									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) + 
@@ -88,8 +80,6 @@ namespace TokenSwapping
 					}
 					else {
 						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
-							//instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-							//solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
 							swaps.push_back(std::pair<std::pair<int, int>, int>{
 								std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]},
 									abs(not_matching_tokens[0] - instance[not_matching_tokens[1]]) +
