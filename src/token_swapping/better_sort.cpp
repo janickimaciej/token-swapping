@@ -14,7 +14,10 @@ namespace TokenSwapping
 			solution.push_back(std::pair<int, int>{0, 1});
 			return solution;
 		}
+		bool makeOnlyTwoSwap = true;
+		bool isSorted = false;
 		for (int n = 0; n < instance.size();++n) {
+			bool noneChanged = true;
 			for (int i = 1; i < instance.size() - 1; ++i)
 			{
 				if (instance[i - 1] <= instance[i] && instance[i] <= instance[i + 1]) {
@@ -47,33 +50,48 @@ namespace TokenSwapping
 				}
 
 				if (not_matching_tokens.size() == 3) {
-					if (instance[i - 1] > instance[i]) {
+					if (instance[i - 1] > instance[i] && !makeOnlyTwoSwap) {
 						instance.swap(i - 1, i);
-						solution.push_back(std::pair<int, int>{i-1, i});
+						solution.push_back(std::pair<int, int>{i - 1, i});
+						//makeOnlyTwoSwap = true;
 					}
 					if (instance[i - 1] > instance[i + 1]) {
 						instance.swap(i - 1, i + 1);
-						solution.push_back(std::pair<int, int>{i - 1, i+1});
+						solution.push_back(std::pair<int, int>{i - 1, i + 1});
+						noneChanged = false;
 					}
-					if (instance[i] > instance[i + 1]) {
+					if (instance[i] > instance[i + 1] && !makeOnlyTwoSwap) {
 						instance.swap(i, i + 1);
 						solution.push_back(std::pair<int, int>{i, i + 1});
+						//makeOnlyTwoSwap = true;
 					}
 				}
 				else if (not_matching_tokens.size() == 2) {
-					if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
-						instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
-						solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+					if (makeOnlyTwoSwap) {
+						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]] && 
+							abs(not_matching_tokens[0] - not_matching_tokens[1]) == 2) {
+							instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
+							solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+							noneChanged = false;
+						}
+					}
+					else {
+						if (instance[not_matching_tokens[0]] > instance[not_matching_tokens[1]]) {
+							instance.swap(not_matching_tokens[0], not_matching_tokens[1]);
+							solution.push_back(std::pair<int, int>{not_matching_tokens[0], not_matching_tokens[1]});
+						}
 					}
 				}
 			}
-			bool isSorted = true;
+			isSorted = true;
 			for (int h = 0;h < instance.size() - 1;h++) {
 				if (instance[h] > instance[h + 1])
 					isSorted = false;
 			}
 			if (isSorted)
 				break;
+			if(noneChanged)
+				makeOnlyTwoSwap = false;
 		}
 
 		// Zamiana miejscami pozosta³ych niepasuj¹cych
