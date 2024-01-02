@@ -36,40 +36,27 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-<<<<<<< HEAD
-	//TokenSwapping::Instance instance{2, {2,3,6,4,0,5,1}};
-	//printSolution(instance, TokenSwapping::BetterSort::getSolution(instance));
-	//printSolution(instance, TokenSwapping::BetterLessGreedySort::getSolution(instance));
-	
-=======
 	//TokenSwapping::Instance instance{2, {2, 3, 5, 0, 4, 1}};
 	//TokenSwapping::Database<9> database{2};
 	//database.generate();
->>>>>>> 3b76b765c2d745cabeccf0977549332be0c6ebd4
 	runTest();
 	return 0;
 }
 
 void runTest()
 {
-<<<<<<< HEAD
-	int power = 2;
-	int size = 7;
-	TokenSwapping::AlgStats algStats{power, size, TokenSwapping::BetterSort::getSolution};
-=======
 	constexpr int power = 2;
-	constexpr int size = 9;
+	constexpr int size = 7;
 	
 	TokenSwapping::Criteria criteria;
 	criteria.add<TokenSwapping::ReversePairs>();
-	//criteria.add<TokenSwapping::IndependentReverseTriplets>();
-	criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
+	criteria.add<TokenSwapping::IndependentReverseTriplets>();
+	//criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
 	//criteria.add<TokenSwapping::Generators>();
-	TokenSwapping::AlgStats<size> algStats{power, criteria};
+	//TokenSwapping::AlgStats<size> algStats{power, criteria};
 
-	//TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::BetterSort::getSolution};
+	TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::BetterSort::getSolution};
 
->>>>>>> 3b76b765c2d745cabeccf0977549332be0c6ebd4
 	algStats.runTest();
 	std::cout << algStats.getFailedCount() << " / " << TokenSwapping::factorial(size) <<
 		" failed\n";
