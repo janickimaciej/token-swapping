@@ -1,41 +1,45 @@
 #pragma once
 
 #include "token_swapping/instance.hpp"
+#include "token_swapping/utils.hpp"
 
+#include <climits>
 #include <vector>
-#include <iostream> //tmp
+
 namespace TokenSwapping
 {
 	class Stats
 	{
 	public:
-		static int permutation2Index(const Instance& instance);
 		template <typename Function>
-		static void iteratePermutations(int power, int size, Function& function);
+		static void iteratePermutations(int power, int size, Function& function, int from = 0,
+			int to = INT_MAX);
 
 	private:
-		static int getPositionIndex(const std::vector<bool>& used, int element);
 		static int getNext(const std::vector<bool>& used, int previous);
 	};
 
 	template <typename Function>
-	void Stats::iteratePermutations(int power, int size, Function& function)
+	void Stats::iteratePermutations(int power, int size, Function& function, int from, int to)
 	{
 		std::vector<int> stack;
 		std::vector<bool> used(size, false);
 		int previous = -1;
-		//tmp b
-		int asdf = 0;
-		//tmp e
 		while (true)
 		{
-			if (!(++asdf % 100))//tmp b
-			{
-				std::cout << asdf << std::endl;
-			}//tmp e
 			if (stack.size() == size)
 			{
-				function(TokenSwapping::Instance{power, stack});
+				Instance instance{power, stack};
+				instance.print();
+				int permutationIndex = permutation2Index(instance);
+				if (permutationIndex >= to)
+				{
+					return;
+				}
+				if (permutationIndex >= from)
+				{
+					function(instance);
+				}
 				previous = stack.back();
 				stack.pop_back();
 				used[previous] = false;

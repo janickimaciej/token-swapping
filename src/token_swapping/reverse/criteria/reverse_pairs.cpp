@@ -1,11 +1,21 @@
-#include "token_swapping/pairs_metric.hpp"
+#include "token_swapping/reverse/criteria/reverse_pairs.hpp"
 
 #include <algorithm>
 #include <utility>
 
 namespace TokenSwapping
 {
-	int PairsMetric::distanceFromSolved(const Instance& instance)
+	int ReversePairs::score(Instance instance, const std::pair<int, int>& move) const
+	{
+		return changeInDistance(instance, move);
+	}
+
+	bool ReversePairs::isPositive() const
+	{
+		return false;
+	}
+
+	int ReversePairs::distance(const Instance& instance)
 	{
 		int distance = 0;
 		for (int i = 0; i < instance.size() - 1; ++i)
@@ -21,7 +31,7 @@ namespace TokenSwapping
 		return distance;
 	}
 
-	int PairsMetric::changeInDistance(const Instance& instance, const std::pair<int, int>& move)
+	int ReversePairs::changeInDistance(const Instance& instance, const std::pair<int, int>& move)
 	{
 		int minIndex = std::min(move.first, move.second);
 		int maxIndex = std::max(move.first, move.second);

@@ -25,6 +25,26 @@ namespace TokenSwapping
 		}
 	}
 
+	Instance::Instance(int power, const Instance& instance) :
+		m_power{power},
+		m_tokens{instance.m_tokens}
+	{
+		if (power <= 0 || power >= m_tokens.size())
+		{
+			error("Instance::Instance: Invalid power");
+		}
+	}
+
+	Instance Instance::getSortedInstance(int size, int power)
+	{
+		std::vector<int> tokens;
+		for (int i = 0; i < size; ++i)
+		{
+			tokens.push_back(i);
+		}
+		return Instance{power, tokens};
+	}
+
 	int Instance::power() const
 	{
 		return m_power;
@@ -96,6 +116,15 @@ namespace TokenSwapping
 	void Instance::swap(const std::pair<int, int>& move)
 	{
 		swap(move.first, move.second);
+	}
+
+	void Instance::print() const
+	{
+		for (int i = 0; i < size(); ++i)
+		{
+			std::cout << m_tokens[i] << " ";
+		}
+		std::cout << '\n';
 	}
 
 	void Instance::error(const char* msg) const

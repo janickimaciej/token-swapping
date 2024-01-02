@@ -1,4 +1,4 @@
-#include "token_swapping/better_sort.hpp"
+#include "token_swapping/triplets/better_sort.hpp"
 
 #include <utility>
 #include <vector>

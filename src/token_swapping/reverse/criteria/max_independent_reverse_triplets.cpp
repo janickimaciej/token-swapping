@@ -1,4 +1,4 @@
-#include "token_swapping/independent_reverse_triples.hpp"
+#include "token_swapping/reverse/criteria/max_independent_reverse_triplets.hpp"
 
 #include <array>
 #include <utility>
@@ -6,18 +6,25 @@
 
 namespace TokenSwapping
 {
-	int IndependentReverseTriples::count(const Instance& instance)
+	int MaxIndependentReverseTriplets::score(Instance instance, const std::pair<int, int>& move)
+		const
 	{
+		instance.swap(move);
 		int maximum = -1;
 		int solution = 0;
 		std::vector<std::array<int, 3>> available;
-		allTriples(instance, available);
+		allTriplets(instance, available);
 		countRecursive(maximum, solution, available);
 		return maximum;
 	}
 
-	void IndependentReverseTriples::allTriples(const Instance& instance,
-		std::vector<std::array<int, 3>>& allTriples)
+	bool MaxIndependentReverseTriplets::isPositive() const
+	{
+		return true;
+	}
+
+	void MaxIndependentReverseTriplets::allTriplets(const Instance& instance,
+		std::vector<std::array<int, 3>>& allTriplets)
 	{
 		for (int i = 0; i < instance.size() - 2; ++i)
 		{
@@ -27,14 +34,14 @@ namespace TokenSwapping
 				{
 					if (instance[i] > instance[j] && instance[j] > instance[k])
 					{
-						allTriples.push_back(std::array<int, 3>{i, j, k});
+						allTriplets.push_back(std::array<int, 3>{i, j, k});
 					}
 				}
 			}
 		}
 	}
 
-	void IndependentReverseTriples::countRecursive(int& maximum, int solution,
+	void MaxIndependentReverseTriplets::countRecursive(int& maximum, int solution,
 		const std::vector<std::array<int, 3>>& available)
 	{
 		if (available.size() == 0 && solution > maximum)
@@ -64,13 +71,5 @@ namespace TokenSwapping
 			}
 			countRecursive(maximum, solution + 1, newAvailable);
 		}
-	}
-
-	int IndependentReverseTriples::changeInCount(Instance instance, const std::pair<int, int>& move)
-	{
-		int countBefore = count(instance);
-		instance.swap(move);
-		int countAfter = count(instance);
-		return countAfter - countBefore;
 	}
 };
