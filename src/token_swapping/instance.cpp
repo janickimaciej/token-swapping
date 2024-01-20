@@ -120,11 +120,11 @@ namespace TokenSwapping
 
 	void Instance::print() const
 	{
-		for (int i = 0; i < size(); ++i)
-		{
-			std::cout << m_tokens[i] << " ";
-		}
-		std::cout << '\n';
+		//for (int i = 0; i < size(); ++i)
+		//{
+		//	std::cout << m_tokens[i] << " ";
+		//}
+		//std::cout << '\n';
 	}
 
 	void Instance::error(const char* msg) const

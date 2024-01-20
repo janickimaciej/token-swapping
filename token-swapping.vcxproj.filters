@@ -16,6 +16,7 @@
     <ClCompile Include="src\token_swapping\reverse\criteria\criteria.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\generators.cpp" />
+    <ClCompile Include="src\token_swapping\backtracking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\brute_force_sort_all.hpp" />
@@ -42,5 +43,6 @@
     <ClInclude Include="src\token_swapping\reverse\criteria\reverse_pairs_bool.hpp" />
     <ClInclude Include="src\token_swapping\reverse\criteria\generators.hpp" />
     <ClInclude Include="src\token_swapping\database_tree.hpp" />
+    <ClInclude Include="src\token_swapping\backtracking.hpp" />
   </ItemGroup>
 </Project>
