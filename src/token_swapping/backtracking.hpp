@@ -7,6 +7,16 @@
 
 namespace TokenSwapping
 {
+	class Node
+	{
+	public:
+		Node() = delete;
+		~Node() = delete;
+		int distance;
+		Node** next;
+		// TODO: Drzewo
+	};
+
 	class Backtracking
 	{
 	public:
