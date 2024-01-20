@@ -10,21 +10,24 @@ namespace TokenSwapping
 	class Node
 	{
 	public:
-		Node() = delete;
-		~Node() = delete;
+		Node();
+		~Node();
 		int distance;
-		Node** next;
-		// TODO: Drzewo
+		int numNeighbours;
+		std::pair<int, int> swap;
+		Node* next;
+
+		void addNewNeighbour(Node node);
 	};
 
 	class Backtracking
 	{
 	public:
 		Backtracking() = delete;
-		static std::pair<std::vector<std::pair<int, int>>, int> getSolution(Instance instance, int maxDepth);
+		static std::pair < std::pair<std::vector<std::pair<int, int>>, int>, Node> getSolution(Instance instance, int maxDepth);
 		~Backtracking() = delete;
 	private:
-		static void getSolutionRecursive(Instance& instance, bool& solutionFound, int& minDistance,
+		static void getSolutionRecursive(Instance& instance, bool& solutionFound, int& minDistance, Node& node,
 			std::vector<std::pair<int, int>>& solution, int maxDepth, std::pair<int, int> lastSwap);
 	};
 	

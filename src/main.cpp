@@ -38,9 +38,9 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 int main()
 {
 	TokenSwapping::Instance instance{2, {2, 3, 5, 0, 4, 1}};
-	std::pair<std::vector<std::pair<int, int>>, int> lol = TokenSwapping::Backtracking::getSolution(instance, 3);
+	std::pair < std::pair<std::vector<std::pair<int, int>>, int>, TokenSwapping::Node> lol = TokenSwapping::Backtracking::getSolution(instance, 3);
 	
-	std::cout << lol.second << std::endl;
+	std::cout << lol.first.second << std::endl;
 
 	//TokenSwapping::Database<9> database{2};
 	//database.generate();
