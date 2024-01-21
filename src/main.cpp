@@ -17,9 +17,11 @@
 #include "token_swapping/stats.hpp"
 #include "token_swapping/triplets/better_sort.hpp"
 #include "token_swapping/utils.hpp"
+#include "token_swapping/backtracking.hpp"
 
 #include <chrono>
 #include <iostream>
+#include <functional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -36,7 +38,10 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 
 int main()
 {
-	//TokenSwapping::Instance instance{2, {2, 3, 5, 0, 4, 1}};
+	TokenSwapping::Instance instance{2, {5, 4, 3, 2, 1, 0}};
+	//std::vector<std::pair<int,int>> solution = TokenSwapping::Backtracking::getSolution(instance);
+	//printSolution(instance, solution);
+
 	//TokenSwapping::Database<9> database{2};
 	//database.generate();
 	runTest();
@@ -48,16 +53,22 @@ void runTest()
 	constexpr int power = 2;
 	constexpr int size = 7;
 	
-	TokenSwapping::Criteria criteria;
-	criteria.add<TokenSwapping::ReversePairs>();
-	criteria.add<TokenSwapping::IndependentReverseTriplets>();
-	//criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
+	//TokenSwapping::Criteria criteria;
+	//criteria.add<TokenSwapping::ReversePairs>();
+	//criteria.add<TokenSwapping::IndependentReverseTriplets>();
 	//criteria.add<TokenSwapping::Generators>();
 	//TokenSwapping::AlgStats<size> algStats{power, criteria};
-
-	TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::BetterSort::getSolution};
-
+	
+	TokenSwapping::AlgStats<size> algStats{
+		power, std::bind(TokenSwapping::Backtracking::getSolution, std::placeholders::_1, 1)};
+		//power, TokenSwapping::IndependentReverseTripletsSort::getSolution};
+	
+	auto start = std::chrono::high_resolution_clock::now();
 	algStats.runTest();
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
+	std::cout << "Time elapsed: " << durationMs.count() << " ms" << std::endl;
 	std::cout << algStats.getFailedCount() << " / " << TokenSwapping::factorial(size) <<
 		" failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << TokenSwapping::factorial(size) <<

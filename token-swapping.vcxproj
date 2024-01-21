@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\token_swapping\backtracking.cpp" />
     <ClCompile Include="src\token_swapping\reverse\algs\criteria_alg.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\criteria.cpp" />
     <ClCompile Include="src\token_swapping\reverse\criteria\generators.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\token_swapping\alg_stats.hpp" />
+    <ClInclude Include="src\token_swapping\backtracking.hpp" />
     <ClInclude Include="src\token_swapping\database_tree.hpp" />
     <ClInclude Include="src\token_swapping\reverse\algs\criteria_alg.hpp" />
     <ClInclude Include="src\token_swapping\reverse\algs\independent_reverse_triplets_sort.hpp" />
