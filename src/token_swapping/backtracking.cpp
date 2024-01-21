@@ -63,7 +63,7 @@ namespace TokenSwapping
 			int minDistance = INT_MAX;
 			std::vector<Node*> minimalNodes;
 			getSolutionRecursive(instance, solutionFound, minDistance, iterator, iterator, minimalNodes, solution, 3,
-				std::make_pair(-1, -1));
+				iterator->swap);
 			if (iterator->next.size() == 0)
 				break;
 			Node* nextNode = calculateNextNode(iterator, minimalNodes);
