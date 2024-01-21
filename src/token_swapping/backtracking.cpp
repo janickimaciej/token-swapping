@@ -36,7 +36,8 @@ namespace TokenSwapping
 		return nextNode;
 	}
 
-	void Backtracking::appendSwaps(Node* head, Node* nextNode, Instance& instance, std::vector<std::pair<int,int>>& finalSolution) {
+	void Backtracking::appendSwaps(Node* head, Node* nextNode, Instance& instance,
+		std::vector<std::pair<int,int>>& finalSolution) {
 		Node* iterator = nextNode;
 		std::vector<std::pair<int, int>> swaps;
 
@@ -50,7 +51,7 @@ namespace TokenSwapping
 		}
 	}
 
-	std::vector<std::pair<int, int>> Backtracking::getSolution(Instance instance)
+	std::vector<std::pair<int, int>> Backtracking::getSolution(Instance instance, int depth)
 	{
 		bool solutionFound = false;
 		std::vector<std::pair<int, int>> solution;
@@ -62,8 +63,8 @@ namespace TokenSwapping
 		while (ReversePairs::distance(instance) != 0) {
 			int minDistance = INT_MAX;
 			std::vector<Node*> minimalNodes;
-			getSolutionRecursive(instance, solutionFound, minDistance, iterator, iterator, minimalNodes, solution, 3,
-				iterator->swap);
+			getSolutionRecursive(instance, solutionFound, minDistance, iterator, iterator,
+				minimalNodes, solution, depth, iterator->swap);
 			if (iterator->next.size() == 0)
 				break;
 			Node* nextNode = calculateNextNode(iterator, minimalNodes);
@@ -74,14 +75,16 @@ namespace TokenSwapping
 		return finalSolution;
 	}
 
-	void Backtracking::getSolutionRecursive(Instance& instance, bool& solutionFound, int& minDistance, Node* head, Node* node, std::vector<Node*>& minimalNodes,
+	void Backtracking::getSolutionRecursive(Instance& instance, bool& solutionFound,
+		int& minDistance, Node* head, Node* node, std::vector<Node*>& minimalNodes,
 		std::vector<std::pair<int, int>>& solution, int maxDepth, std::pair<int, int> lastSwap)
 	{
 
 		if (minDistance == ReversePairs::distance(instance)) {
 			minimalNodes.push_back(node);
 		}
-		else if (minDistance > ReversePairs::distance(instance) && ReversePairs::distance(instance) != head->distance) {
+		else if (minDistance > ReversePairs::distance(instance) &&
+			ReversePairs::distance(instance) != head->distance) {
 			minimalNodes.clear();
 			minimalNodes.push_back(node);
 			minDistance = ReversePairs::distance(instance);
@@ -115,8 +118,8 @@ namespace TokenSwapping
 				newNode->distance = ReversePairs::distance(instance);
 				newNode->previous = node;
 				node->addNewNeighbour(newNode);
-				getSolutionRecursive(instance, solutionFound, minDistance, head, newNode, minimalNodes, solution, maxDepth,
-					std::make_pair(j, j + i));
+				getSolutionRecursive(instance, solutionFound, minDistance, head, newNode,
+					minimalNodes, solution, maxDepth, std::make_pair(j, j + i));
 				//if (solutionFound)
 				//{
 				//	return;

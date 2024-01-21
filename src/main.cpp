@@ -21,6 +21,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <functional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -38,29 +39,36 @@ int solutionWithOnlyNegativeMovesCount(const TokenSwapping::Instance& instance,
 int main()
 {
 	TokenSwapping::Instance instance{2, {5, 4, 3, 2, 1, 0}};
-	std::vector<std::pair<int,int>> solution = TokenSwapping::Backtracking::getSolution(instance);
-	printSolution(instance, solution);
+	//std::vector<std::pair<int,int>> solution = TokenSwapping::Backtracking::getSolution(instance);
+	//printSolution(instance, solution);
 
 	//TokenSwapping::Database<9> database{2};
 	//database.generate();
-	//runTest();
+	runTest();
 	return 0;
 }
 
 void runTest()
 {
 	constexpr int power = 2;
-	constexpr int size = 8;
+	constexpr int size = 7;
 	
-	TokenSwapping::Criteria criteria;
+	//TokenSwapping::Criteria criteria;
+	//criteria.add<TokenSwapping::ReversePairs>();
 	//criteria.add<TokenSwapping::IndependentReverseTriplets>();
-	//criteria.add<TokenSwapping::MaxIndependentReverseTriplets>();
 	//criteria.add<TokenSwapping::Generators>();
 	//TokenSwapping::AlgStats<size> algStats{power, criteria};
-
-	TokenSwapping::AlgStats<size> algStats{power, TokenSwapping::MaxIndependentReverseTripletsSort::getSolution};
-
+	
+	TokenSwapping::AlgStats<size> algStats{
+		power, std::bind(TokenSwapping::Backtracking::getSolution, std::placeholders::_1, 1)};
+		//power, TokenSwapping::IndependentReverseTripletsSort::getSolution};
+	
+	auto start = std::chrono::high_resolution_clock::now();
 	algStats.runTest();
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
+	std::cout << "Time elapsed: " << durationMs.count() << " ms" << std::endl;
 	std::cout << algStats.getFailedCount() << " / " << TokenSwapping::factorial(size) <<
 		" failed\n";
 	std::cout << algStats.getOptimalCount() << " / " << TokenSwapping::factorial(size) <<
