@@ -24,8 +24,8 @@ namespace TokenSwapping
 		Node* iterator = head;
 
 		std::vector<std::pair<int, int>> finalSolution;
-		while (minDistance != 0) {
-			getSolutionRecursive(instance, solutionFound, minDistance, iterator, solution, 1,
+		while (ReversePairs::distance(instance) != 0) {
+			getSolutionRecursive(instance, solutionFound, minDistance, iterator, solution, 3,
 				std::make_pair(-1, -1));
 			int minDist = INT_MAX;
 			if (iterator->next.size() == 0)
@@ -80,10 +80,10 @@ namespace TokenSwapping
 				node->addNewNeighbour(newNode);
 				getSolutionRecursive(instance, solutionFound, minDistance, newNode, solution, maxDepth,
 					std::make_pair(j, j + i));
-				if (solutionFound)
-				{
-					return;
-				}
+				//if (solutionFound)
+				//{
+				//	return;
+				//}
 				instance.swap(j, j + i);
 				solution.pop_back();
 			}
